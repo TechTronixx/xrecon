@@ -1,13 +1,14 @@
 import "./Login.css";
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChatSVG } from "../../Assets/index.js"
 import { MdAlternateEmail } from "react-icons/md"
-import { BsShieldLock } from "react-icons/bs"
+import { BsEye, BsEyeSlash } from "react-icons/bs"
 import { FiLogIn } from "react-icons/fi"
 // import { useContextData } from "../../hooks/useContextData"
 
 const Login = () => {
+    const [showPass, setShowPass] = useState(false);
     const emailRef = useRef();
     const passwordRef = useRef();
     // const { setUser } = useContextData();
@@ -36,7 +37,10 @@ const Login = () => {
                     </div>
                     <div className="Login-input flex">
                         <input type="password" placeholder="Password" ref={passwordRef} />
-                        <BsShieldLock size={25} color="var(--text)" />
+                        <div className="Login-showpass flex" onClick={() => setShowPass(prev => !prev)}>
+                            {!showPass ? <BsEyeSlash size={25} color="var(--text)" />
+                                : <BsEye size={25} color="var(--text)" />}
+                        </div>
                     </div>
 
                     <div className="Login-submit flex">

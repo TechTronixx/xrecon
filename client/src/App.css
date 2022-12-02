@@ -1,9 +1,10 @@
 :root{
   --primary: #00A7E1;
   --accent: #5c34ce;
-  --secondary: #121121;
+  --secondary: #001220;
+  --secondary-alt: #002746;
   --bg: #F1F2F3;
-  --grey: #18172c;
+  --grey: #6a6a6a;
   --text: #000000;;
   --text-alt: #FFFFFF;
   --white: #FFFFFF;
@@ -14,7 +15,7 @@ body[data-theme="dark"]{
   --primary: #00A7E1;
   --accent: #5c34ce;
   --secondary: #F1F2F3;
-  --bg: #121121;
+  --bg: #001220;
   --grey: #6a6a6a;
   --text: #FFFFFF;
   --text-alt: #000000;
@@ -46,4 +47,14 @@ body{
 
 .gap-1{
   gap: 1em;
+}
+
+.webTitle{
+  background: linear-gradient(-50deg, 
+  var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: inherit;
+  /* color: var(--secondary); */
 }

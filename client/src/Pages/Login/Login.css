@@ -19,18 +19,9 @@
     /* color: var(--text-alt); */
 }
 
-.webTitle{
-    background: linear-gradient(180deg, 
-    var(--primary) 0%, var(--accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    /* color: var(--secondary); */
-}
-
 .Login-form{
     width: 50%;
-    background-color: var(--grey);
+    background-color: var(--secondary-alt);
     justify-content: space-between;
     text-align: center;
     padding: 2em;
@@ -45,7 +36,7 @@
 .Login-form form h2{
     margin-bottom: 2em;
     font-size: 2.5em;
-    color: var(--text-alt);
+    color: var(--white);
 }
 
 .Login-input{
@@ -73,8 +64,7 @@
     min-width: 20em;
     padding: 0.5em;
     border-radius: 0.4em;
-    background: linear-gradient(50deg,
-    var(--primary) 0%, var(--accent) 100%);
+    background-color: var(--primary);
     gap: 1em;
     margin-top: 0.5em;
     cursor: pointer;
