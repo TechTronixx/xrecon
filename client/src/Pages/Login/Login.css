@@ -1,0 +1,100 @@
+.Login-main{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.Login-sideart{
+    width: 50%;
+    justify-content: space-between;
+    text-align: center;
+    background-color: var(--secondary);
+    padding: 2em;
+}
+
+.Login-sideart h1{
+    font-size: 4em;
+    font-weight: 900;
+    letter-spacing: 1px;
+    /* color: var(--text-alt); */
+}
+
+.webTitle{
+    background: linear-gradient(180deg, 
+    var(--primary) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* color: var(--secondary); */
+}
+
+.Login-form{
+    width: 50%;
+    background-color: var(--grey);
+    justify-content: space-between;
+    text-align: center;
+    padding: 2em;
+}
+
+.Login-form form{
+    height: 100%;
+    margin-bottom: 4em;
+    gap: 1.5em;
+}
+
+.Login-form form h2{
+    margin-bottom: 2em;
+    font-size: 2.5em;
+    color: var(--text-alt);
+}
+
+.Login-input{
+    background-color: var(--white);
+    min-width: 20em;
+    padding-right: 1em;
+    border-radius: 0.4em;
+    transition: 0.2s ease-in-out;
+}
+
+.Login-input input{
+    width: 100%;
+    padding: 0.5em 1em;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    border-radius: 0.4em;
+}
+
+.Login-input:focus-within{
+    box-shadow: 0 0 15px 0 rgba(204, 204, 204, 0.2);
+}
+
+.Login-submit{
+    min-width: 20em;
+    padding: 0.5em;
+    border-radius: 0.4em;
+    background: linear-gradient(50deg,
+    var(--primary) 0%, var(--accent) 100%);
+    gap: 1em;
+    margin-top: 0.5em;
+    cursor: pointer;
+}
+
+.Login-submit input{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--text-alt);
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.Login-signup{
+    color: var(--text-alt);
+    margin-bottom: 2em;
+}
+
+.Login-signup a{
+    color: var(--primary);
+    text-decoration: none;
+}
