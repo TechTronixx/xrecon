@@ -89,12 +89,13 @@
     cursor: pointer;
 }
 
-.Login-signup{
+.Login-register{
     color: var(--text-alt);
     margin-bottom: 2em;
 }
 
-.Login-signup a{
+.Login-register a{
     color: var(--primary);
     text-decoration: none;
+    font-size: 1.2em;
 }
