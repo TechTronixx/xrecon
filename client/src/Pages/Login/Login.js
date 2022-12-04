@@ -13,8 +13,7 @@ const Login = () => {
     const passwordRef = useRef();
     // const { setUser } = useContextData();
 
-    const OnSubmit = (e) => {
-        e.preventDefault();
+    const HandleSubmit = () => {
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         console.log(email, password)
@@ -28,7 +27,7 @@ const Login = () => {
                 <img src={ChatSVG} width={400} height={400} alt="Messaging" />
             </div>
             <div className="Login-form flex col">
-                <form onSubmit={OnSubmit} className="flex col">
+                <form className="flex col">
                     <h2>Login to <span className="webTitle">XRecon</span></h2>
 
                     <div className="Login-input flex">
@@ -43,9 +42,9 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <div className="Login-submit flex">
-                        <FiLogIn size={25} color="var(--text-alt)" />
-                        <input type="submit" value="Login" />
+                    <div className="Login-submit flex" onClick={HandleSubmit}>
+                        <FiLogIn size={25} color="var(--text)" />
+                        <input type="button" value="Login" />
                     </div>
                 </form>
 
