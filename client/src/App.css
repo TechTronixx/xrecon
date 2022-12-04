@@ -3,22 +3,23 @@
   --accent: #5c34ce;
   --secondary: #001220;
   --secondary-alt: #002746;
-  --bg: #F1F2F3;
-  --grey: #6a6a6a;
-  --text: #000000;;
-  --text-alt: #FFFFFF;
+  --bg: #001220;
+  --text: #FFFFFF;
+  --text-alt: #000000;
+  --grey: rgba(255, 255, 255, 0.5);
+  --grey-alt: rgba(204, 204, 204, 0.1);
   --white: #FFFFFF;
   --black: #000000;
 }
 
-body[data-theme="dark"]{
+body[data-theme="light"]{
   --primary: #00A7E1;
   --accent: #5c34ce;
   --secondary: #F1F2F3;
-  --bg: #001220;
+  --bg: #F1F2F3;
+  --text: #000000;;
+  --text-alt: #FFFFFF;
   --grey: #6a6a6a;
-  --text: #FFFFFF;
-  --text-alt: #000000;
   --white: #FFFFFF;
   --black: #000000;
 }
@@ -55,6 +56,22 @@ body{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-size: inherit;
+  /* font-size: inherit; */
   /* color: var(--secondary); */
+}
+
+/* Custom ScrollBar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-alt);
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
 }

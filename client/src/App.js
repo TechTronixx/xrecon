@@ -2,14 +2,15 @@ import './App.css';
 import { BrowserRouter as Browser, Routes, Route, Navigate } from 'react-router-dom';
 // import ContextProvider from './Context/Context';
 // import { useContextData } from './hooks/useContextData';
-import { ToastContainer } from "react-toastify"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Dashboard from './Components/Dashboard/Dashboard';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 
 function App() {
-  const user = false;
+  const user = true;
   // const { user } = useContextData();
   // console.log(user);
   return (
@@ -21,7 +22,17 @@ function App() {
           <Route path="/register" element={<Register />} />
         </Routes>
       </Browser>
-      <ToastContainer />
+
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar="false"
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        limit={3}
+      />
     </div>
   );
 }
