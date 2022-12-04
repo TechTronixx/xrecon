@@ -17,9 +17,9 @@ function App() {
     <div className="App">
       <Browser>
         <Routes>
-          <Route path="/" element={user ? <Dashboard /> : <Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/" exact element={user ? <Dashboard /> : <Navigate to="/login" />} />
         </Routes>
       </Browser>
 
