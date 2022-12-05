@@ -84,14 +84,21 @@
 }
 
 .Register-submit{
-    min-width: 24em;
-    padding: 0.8em;
+    min-width: 20em;
+    padding: 0.5em;
     border-radius: 0.4em;
     background-color: var(--primary);
-    color: var(--text);
-    gap: 1em;    border: none;
+    gap: 1em;
+    margin-top: 0.5em;
+    cursor: pointer;
+}
+
+.Register-submit input{
+    border: none;
     outline: none;
-    margin-top: 1em;
+    background-color: transparent;
+    color: var(--text);
+    font-size: 1em;
     cursor: pointer;
 }
 

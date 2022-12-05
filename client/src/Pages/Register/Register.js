@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { MdPerson, MdAlternateEmail } from "react-icons/md"
 import { BsEye, BsEyeSlash } from "react-icons/bs"
 import { BiUser } from "react-icons/bi"
+import { FiUserPlus, FiLoader } from "react-icons/fi"
 import { GoSync } from "react-icons/go"
 // import { CircleBg } from "../../Assets/index.js"
 import { toast } from 'react-toastify'
@@ -16,6 +17,7 @@ const Register = () => {
     const [error, setError] = useState("");
     const [isAvatarImg, setIsAvatarImg] = useState(false);
     const [defaultName, setDefaultName] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const nameRef = useRef();
     const emailRef = useRef();
@@ -25,11 +27,13 @@ const Register = () => {
     const avatarInputRef = useRef();
     const RandomBtnRef = useRef();
     const FormRef = useRef();
+    const SubmitRef = useRef();
 
     const navigate = useNavigate();
 
     const HandleRegister = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const defaultAvatar = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" color=#fff height="60" width="60" xmlns="http://www.w3.org/2000/svg" style="color: #fff;"><path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"></path></svg>';
 
         try {
@@ -39,7 +43,6 @@ const Register = () => {
             const avatar = AvatarRef?.current?.innerHTML || defaultAvatar;
 
             const result = await axios.post('/register', { username, email, password, avatar });
-            console.log(result);
 
             if (result.data.status) {
                 toast.success("User registered successfully");
@@ -47,7 +50,9 @@ const Register = () => {
             } else {
                 toast.error(result.data.error || "Something went wrong");
             }
+            setLoading(false);
         } catch (err) {
+            setLoading(false);
             toast.error(err.response.data.error);
         }
     }
@@ -77,6 +82,7 @@ const Register = () => {
             passwordRef.current.parentNode.classList.remove("RegError");
         }
 
+        OnChangePassConf();
     }
 
     const OnChangePassConf = () => {
@@ -186,7 +192,11 @@ const Register = () => {
                     </div>
                     <p className="Register-errorMsg" style={error === "" ? { display: "none" } : { display: "flex" }}>{error}</p>
 
-                    <input type="submit" className="Register-submit flex" value="Create New Account" />
+                    <div className="Register-submit flex" onClick={() => SubmitRef.current.click()}>
+                        {!loading ? <FiUserPlus size={25} color="var(--white)" />
+                            : <FiLoader size={25} color="var(--white)" />}
+                        <input type="submit" ref={SubmitRef} value="Create New Account" />
+                    </div>
                 </form>
                 <div className="Register-login flex gap-1">
                     <p>Already have an account?</p>
