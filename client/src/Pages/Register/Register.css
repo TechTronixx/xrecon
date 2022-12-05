@@ -70,13 +70,17 @@
 }
 
 .Register-errorMsg{
-    color: red;
-    background-color: var(--white);
+    color: var(--white);
+    background-color: red ;
     padding: 0.2em 0.6em;
     border-radius: 0.4em;
     font-size: 0.8em;
     width: 100%;
     justify-content: center;
+}
+
+.Register-showpass{
+    cursor: pointer;
 }
 
 .Register-submit{

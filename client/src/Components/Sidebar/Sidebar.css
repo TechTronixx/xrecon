@@ -2,11 +2,10 @@
     min-width: 30%;
     height: 100%;
     overflow: hidden;
-    /* min-height: 100vh; */
     background-color: var(--secondary);
     display: flex;
     flex-direction: column;
-    /* position: fixed; */
+    box-shadow: 0 0 4px 0 var(--secondary);
 }
 
 .Sidebar-header{
@@ -14,13 +13,19 @@
     justify-content: space-between;
 }
 
-.Sidebar-avatar{
+.Sidebar-newChat{
     cursor: pointer;
 }
 
-.Sidebar-avatar img{
-    border-radius: 100%;
+.Sidebar-avatar{
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
 }
+
+/* .Sidebar-avatar svg{
+    border-radius: 100%;
+} */
 
 .Sidebar-search{
     background-color: var(--secondary);

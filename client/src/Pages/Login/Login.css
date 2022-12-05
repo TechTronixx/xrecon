@@ -60,6 +60,10 @@
     box-shadow: 0 0 15px 0 rgba(204, 204, 204, 0.2);
 }
 
+.Login-showpass{
+    cursor: pointer;
+}
+
 .Login-submit{
     min-width: 20em;
     padding: 0.5em;

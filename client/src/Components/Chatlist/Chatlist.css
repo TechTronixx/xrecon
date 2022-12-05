@@ -13,9 +13,13 @@
     background-color: var(--secondary-alt);
 }
 
-.Chatlist-avatar img{
-    border-radius: 100%;
+.Chatlist-avatar{
+    margin-left: 0.5em;
 }
+
+/* .Chatlist-avatar img{
+    border-radius: 100%;
+} */
 
 .Chatlist-info{
     border-bottom: 1px solid var(--grey-alt);

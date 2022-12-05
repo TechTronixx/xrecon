@@ -8,7 +8,7 @@ import { GoSync } from "react-icons/go"
 // import { CircleBg } from "../../Assets/index.js"
 import { toast } from 'react-toastify'
 import multiavatar from '@multiavatar/multiavatar/esm'
-// import axios from 'axios';
+import axios from 'axios';
 
 const Register = () => {
     const [showPass, setShowPass] = useState(false);
@@ -28,24 +28,55 @@ const Register = () => {
 
     const navigate = useNavigate();
 
-    const HandleRegister = (e) => {
+    const HandleRegister = async (e) => {
         e.preventDefault();
-        try {
-            const name = nameRef.current.value;
-            const email = emailRef.current.value;
-            const password = passwordRef.current.value;
-            const avatar = AvatarRef?.current?.value || "";
+        const defaultAvatar = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" color=#fff height="60" width="60" xmlns="http://www.w3.org/2000/svg" style="color: #fff;"><path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"></path></svg>';
 
-            // const result = axios.post('/users/register', { name, email, password, avatar });
+        try {
+            const username = nameRef.current.value;
+            const email = emailRef.current.value.toLowerCase();
+            const password = passwordRef.current.value;
+            const avatar = AvatarRef?.current?.innerHTML || defaultAvatar;
+
+            const result = await axios.post('/register', { username, email, password, avatar });
+            console.log(result);
+
+            if (result.data.status) {
+                toast.success("User registered successfully");
+                navigate('/login');
+            } else {
+                toast.error(result.data.error || "Something went wrong");
+            }
         } catch (err) {
             toast.error(err.response.data.error);
         }
     }
 
-    const OnBlurPass = () => {
-        if (passwordRef.current.value !== "") {
-            passwordRef.current.value.length <= 4 && setError("Password Should be atleast 4 characters.")
+    const OnBlurEmail = () => {
+        if (emailRef.current.value === "") return;
+
+        const email = emailRef.current.value.toLowerCase();
+        const isValidEmail = email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        if (!isValidEmail) {
+            setError("Enter a valid email");
+            emailRef.current.parentNode.classList.add("RegError");
+            return;
+        } else {
+            setError("");
+            emailRef.current.parentNode.classList.remove("RegError");
         }
+    }
+
+    const OnBlurPass = () => {
+        if (passwordRef.current.value === "") return;
+
+        if (passwordRef.current.value.length < 6) {
+            setError("Password Should be atleast 6 characters.")
+            passwordRef.current.parentNode.classList.add("RegError");
+        } else {
+            passwordRef.current.parentNode.classList.remove("RegError");
+        }
+
     }
 
     const OnChangePassConf = () => {
@@ -119,12 +150,12 @@ const Register = () => {
 
                 <form onSubmit={HandleRegister} ref={FormRef} className="Register-form flex col">
                     <div className="Register-input flex">
-                        <input type="text" placeholder="Username" onChange={HandleAvatarName} />
-                        <MdPerson size={25} color="var(--text)" />
+                        <input type="text" placeholder="Username" ref={nameRef} onChange={HandleAvatarName} required />
+                        <MdPerson size={25} color="var(--black)" />
                     </div>
                     <div className="Register-input flex">
-                        <input type="email" placeholder="Email" />
-                        <MdAlternateEmail size={25} color="var(--text)" />
+                        <input type="email" placeholder="Email" ref={emailRef} onBlur={OnBlurEmail} required />
+                        <MdAlternateEmail size={25} color="var(--black)" />
                     </div>
                     <div className="Register-input flex">
                         <input
@@ -132,10 +163,11 @@ const Register = () => {
                             placeholder="Password"
                             ref={passwordRef}
                             onBlur={OnBlurPass}
+                            required
                             autoComplete="new-password" />
                         <div className="Register-showpass flex" onClick={() => setShowPass(prev => !prev)}>
-                            {!showPass ? <BsEyeSlash size={25} color="var(--text)" />
-                                : <BsEye size={25} color="var(--text)" />}
+                            {!showPass ? <BsEyeSlash size={25} color="var(--black)" />
+                                : <BsEye size={25} color="var(--black)" />}
                         </div>
                     </div>
                     <div className="Register-input flex">
@@ -144,10 +176,11 @@ const Register = () => {
                             placeholder="Confirm Password"
                             autoComplete="new-password"
                             ref={confPasswordRef}
+                            required
                             onChange={OnChangePassConf} />
                         <div className="Register-showpass flex" onClick={() => setShowConfPass(prev => !prev)}>
-                            {!showConfPass ? <BsEyeSlash size={25} color="var(--text)" />
-                                : <BsEye size={25} color="var(--text)" />}
+                            {!showConfPass ? <BsEyeSlash size={25} color="var(--black)" />
+                                : <BsEye size={25} color="var(--black)" />}
                         </div>
 
                     </div>

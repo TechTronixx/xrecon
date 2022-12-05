@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Context } from "../Context/Context";
 
-export function useContextData() {
+export const useContextData = () => {
     return useContext(Context);
 }

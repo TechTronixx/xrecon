@@ -5,19 +5,40 @@ import { ChatSVG } from "../../Assets/index.js"
 import { MdAlternateEmail } from "react-icons/md"
 import { BsEye, BsEyeSlash } from "react-icons/bs"
 import { FiLogIn } from "react-icons/fi"
-// import { useContextData } from "../../hooks/useContextData"
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { useContextData } from "../../hooks/useContextData"
 
 const Login = () => {
     const [showPass, setShowPass] = useState(false);
     const emailRef = useRef();
     const passwordRef = useRef();
-    // const { setUser } = useContextData();
+    const { setUser, setToken } = useContextData();
 
-    const HandleSubmit = () => {
+    const navigate = useNavigate();
+
+    const HandleSubmit = async () => {
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         console.log(email, password)
         // setUser({ email, password });
+
+        const result = await axios.post('/login', { email, password });
+        console.log(result);
+
+        if (result.data.status) {
+            let user = result.data.user;
+            let token = result.data.token;
+
+            setUser(user);
+            setToken(token);
+
+            localStorage.setItem('xrecon-user-token', JSON.stringify({ user, token }));
+            navigate("/");
+        } else {
+            toast.error(result.data.error || "Something went wrong");
+        }
     }
 
     return (
@@ -31,14 +52,14 @@ const Login = () => {
                     <h2>Login to <span className="webTitle">XRecon</span></h2>
 
                     <div className="Login-input flex">
-                        <input type="text" placeholder="Email" ref={emailRef} />
-                        <MdAlternateEmail size={25} color="var(--text)" />
+                        <input type="email" placeholder="Email" ref={emailRef} />
+                        <MdAlternateEmail size={25} color="var(--black)" />
                     </div>
                     <div className="Login-input flex">
-                        <input type="password" placeholder="Password" ref={passwordRef} />
+                        <input type={showPass ? "text" : "password"} placeholder="Password" ref={passwordRef} />
                         <div className="Login-showpass flex" onClick={() => setShowPass(prev => !prev)}>
-                            {!showPass ? <BsEyeSlash size={25} color="var(--text)" />
-                                : <BsEye size={25} color="var(--text)" />}
+                            {!showPass ? <BsEyeSlash size={25} color="var(--black)" />
+                                : <BsEye size={25} color="var(--black)" />}
                         </div>
                     </div>
 

@@ -8,7 +8,7 @@
 
 .Dashboard-welcome{
     width: 100%;
-    gap: 2em;
+    gap: 1.5em;
 }
 
 .Dashboard-welcome h1{
@@ -17,4 +17,24 @@
 
 .Dashboard-welcome p{
     font-size: 0.8em;
+}
+    
+.Dashboard-copyUid input{
+    border: none;
+    outline: none;
+    background-color: var(--secondary);
+    color: var(--white);
+    padding: 0.5em;
+    font-size: 1.1em;
+    width: 16em; 
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+}
+
+.Dashboard-copyBtn{
+    padding: 0.5em;
+    cursor: pointer;
+    background-color: var(--primary);
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
 }
