@@ -16,6 +16,10 @@
     justify-content: space-between;
 }
 
+.Sidebar-header>a {
+    text-decoration: none;
+}
+
 .Sidebar-newChat{
     cursor: pointer;
 }

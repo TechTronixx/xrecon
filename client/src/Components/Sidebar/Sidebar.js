@@ -1,6 +1,6 @@
 import "./Sidebar.css";
 import { useRef, useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { MdSearch } from "react-icons/md"
 import { FiFilter } from "react-icons/fi"
 import { RiChatNewLine } from "react-icons/ri"
@@ -36,7 +36,9 @@ const Sidebar = () => {
     return (
         <div className='Sidebar-Main' ref={SidbarRef}>
             <div className="Sidebar-header flex">
-                <h1 className="webTitle">XRecon</h1>
+                <Link to="/">
+                    <h1 className="webTitle">XRecon</h1>
+                </Link>
 
                 <div className="flex gap-1">
                     <RiChatNewLine size={30} color="var(--grey)" className="Sidebar-newChat" />
