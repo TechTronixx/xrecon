@@ -75,7 +75,7 @@ const Login = () => {
 
                     <div className="Login-submit flex" onClick={() => SubmitRef.current.click()}>
                         {!loading ? <FiLogIn size={25} color="var(--white)" />
-                            : <FiLoader size={25} color="var(--white)" />}
+                            : <FiLoader className="Login-loaderSvg" size={25} color="var(--white)" />}
                         <input type="submit" ref={SubmitRef} value="Login" />
                     </div>
                 </form>

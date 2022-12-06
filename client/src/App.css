@@ -60,6 +60,22 @@ body{
   /* color: var(--secondary); */
 }
 
+.Content-main{
+  transition: 1s ease-in-out;
+}
+
+@media (min-width: 751px){
+  .Outlet{
+    margin-left: 30%;
+  }
+}
+  
+@media (max-width: 750px){
+  .Content-main.Sidebar-Active .Sidebar-Main{
+    width: 100% !important;
+  }
+}
+
 /* Custom ScrollBar */
 ::-webkit-scrollbar {
   width: 20px;
@@ -74,4 +90,9 @@ body{
   border-radius: 20px;
   border: 6px solid transparent;
   background-clip: content-box;
+}
+
+/* Disable blue button click highlight */
+input, button, a, div {
+  -webkit-tap-highlight-color: transparent;
 }

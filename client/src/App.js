@@ -6,9 +6,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
+import Content from './Components/Content';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
+import ChatBox from './Components/ChatBox/ChatBox';
 
 function App() {
   const [isUser, setIsUser] = useState(false);
@@ -35,7 +37,10 @@ function App() {
     <div className="App">
       <Browser>
         <Routes>
-          <Route path="/" element={token ? <Dashboard /> : <Navigate to={"/login"} />} />
+          <Route element={token ? <Content /> : <Navigate to={"/login"} />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/chat/:uid" element={<ChatBox />} />
+          </Route>
           <Route path="/login" element={!token ? <Login /> : <Navigate to={"/"} />} />
           <Route path="/register" element={!token ? <Register /> : <Navigate to={"/"} />} />
         </Routes>

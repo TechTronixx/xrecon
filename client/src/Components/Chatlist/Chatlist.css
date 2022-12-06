@@ -15,6 +15,8 @@
 
 .Chatlist-avatar{
     margin-left: 0.5em;
+    width: 55px;
+    height: 55px;
 }
 
 /* .Chatlist-avatar img{

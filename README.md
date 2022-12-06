@@ -46,6 +46,7 @@
         alt="Socket.IO" 
         title="Socket.IO" 
         width="40"
+        style="background-color: white; border-radius: 100%;"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" 
       />
 </div>

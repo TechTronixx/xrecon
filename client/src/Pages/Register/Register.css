@@ -102,6 +102,18 @@
     cursor: pointer;
 }
 
+.Register-loaderSvg{
+    animation: loader 2s infinite;
+}
+
+@keyframes loader {
+    0%{
+        rotate:0deg;
+    }100%{
+        rotate:360deg;
+    }
+}
+
 .Register-avatar{
     /* padding: 2em; */
     grid-area: avatar;

@@ -1,6 +1,6 @@
 import "./Sidebar.css";
-import { useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRef, useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { MdSearch } from "react-icons/md"
 import { FiFilter } from "react-icons/fi"
 import { RiChatNewLine } from "react-icons/ri"
@@ -10,13 +10,17 @@ import { useContextData } from "../../hooks/useContextData";
 const Sidebar = () => {
     const { user, setUser, setToken } = useContextData();
     const AvatarRef = useRef();
+    const SidbarRef = useRef();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const tempArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     useEffect(() => {
         if (user) {
             AvatarRef.current.innerHTML = user.avatarImg;
         }
-    }, [user])
+    }, [])
 
     const Logout = () => {
         localStorage.removeItem("xrecon-user-token");
@@ -25,8 +29,12 @@ const Sidebar = () => {
         navigate("/login");
     }
 
+    const openChat = (uid) => {
+        navigate(`/chat/${uid}`);
+    }
+
     return (
-        <div className='Sidebar-Main'>
+        <div className='Sidebar-Main' ref={SidbarRef}>
             <div className="Sidebar-header flex">
                 <h1 className="webTitle">XRecon</h1>
 
@@ -41,18 +49,19 @@ const Sidebar = () => {
 
             <div className="Sidebar-search flex">
                 <div className="Sidebar-input flex">
-                    <MdSearch size={25} color="var(--grey)" />
+                    <MdSearch size={30} color="var(--grey)" />
                     <input type="text" placeholder="Search or start new chat" />
                 </div>
 
-                <FiFilter size={25} color="var(--grey)" title="Filter Unread" />
+                <FiFilter size={30} color="var(--grey)" title="Filter Unread" />
             </div>
 
             <div className="Sidebar-chatList">
-                <ChatList />
-                <ChatList />
-                <ChatList />
-                <ChatList />
+                {tempArr.map((item) => {
+                    return <div className="Sidebar-ChatItem" key={item} onClick={() => { openChat(item) }}>
+                        <ChatList uid={item} />
+                    </div>
+                })}
             </div>
         </div>
     )

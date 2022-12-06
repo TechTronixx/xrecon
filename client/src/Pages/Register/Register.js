@@ -194,7 +194,7 @@ const Register = () => {
 
                     <div className="Register-submit flex" onClick={() => SubmitRef.current.click()}>
                         {!loading ? <FiUserPlus size={25} color="var(--white)" />
-                            : <FiLoader size={25} color="var(--white)" />}
+                            : <FiLoader className="Register-loaderSvg" size={25} color="var(--white)" />}
                         <input type="submit" ref={SubmitRef} value="Create New Account" />
                     </div>
                 </form>

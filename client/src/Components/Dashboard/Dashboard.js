@@ -15,8 +15,6 @@ const Dashboard = () => {
 
     return (
         <div className='Dashboard-Main'>
-            <Sidebar />
-
             <div className="Dashboard-welcome flex col">
                 <h1>Welcome to <span className="webTitle">XRecon</span></h1>
 

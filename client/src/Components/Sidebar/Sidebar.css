@@ -1,11 +1,13 @@
 .Sidebar-Main{
-    min-width: 30%;
+    position: fixed;
+    width: 30%;
     height: 100%;
     overflow: hidden;
     background-color: var(--secondary);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 4px 0 var(--secondary);
+    box-shadow: 0 0 1px 0 var(--primary);
+    /* box-shadow: 0 0 1px 0 rgba(0, 169, 225, 0.5); */
     z-index: 2;
 }
 
@@ -61,6 +63,7 @@
 
 .Sidebar-chatList{
     overflow-y: auto;
+    padding-bottom: 8em;
 }
 
 ::-webkit-scrollbar {
@@ -69,7 +72,13 @@
 
 /* Mobile Responsive CSS */
 @media (max-width: 750px){
-.Sidebar-Main{
-    width: 100%;
-}
+    .Sidebar-Main{
+        width: 0 !important;
+    }
+
+    .Sidebar-input input{
+        padding: 0.3em 1em;
+        font-size: 1em;
+    }
+
 }
