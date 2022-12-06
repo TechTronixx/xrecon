@@ -5,7 +5,7 @@
 ##### Created : 01/12/2022
 
 #### Languages
-<div style="display: flex; justify-content: center; align-items: center; padding: 1em;">
+<div align="center">
       <img
         alt="HTML5"
         title="HTML"
@@ -40,12 +40,12 @@
         alt="MongoDB" 
         title="MongoDB" 
         width="40"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" 
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" 
       />
       <img 
         alt="Socket.IO" 
         title="Socket.IO" 
         width="40"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" 
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" 
       />
 </div>
