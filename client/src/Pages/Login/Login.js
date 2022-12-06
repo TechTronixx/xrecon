@@ -25,12 +25,12 @@ const Login = () => {
         setLoading(true);
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        console.log(email, password)
+        // console.log(email, password)
         // setUser({ email, password });
 
         try {
             const result = await axios.post('/login', { email, password });
-            console.log(result);
+            // console.log(result);
 
             if (result.data.status) {
                 let user = result.data.user;
@@ -47,7 +47,7 @@ const Login = () => {
             setLoading(false);
         } catch (err) {
             setLoading(false);
-            toast.error(err.response.data.error);
+            toast.error(err.response.data.error || "Something went wrong");
         }
     }
 

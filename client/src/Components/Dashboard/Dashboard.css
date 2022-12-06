@@ -38,3 +38,10 @@
     border-top-right-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
 }
+
+/* Mobile Responsive CSS */
+@media (max-width: 750px){
+    .Dashboard-welcome{
+        width: 0;
+    }
+}
