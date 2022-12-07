@@ -18,6 +18,11 @@
 .Dashboard-welcome p{
     font-size: 0.8em;
 }
+
+.Dashboard-copyUid>h2{
+    font-size: 1em;
+    letter-spacing: 1px;
+}
     
 .Dashboard-copyUid input{
     border: none;

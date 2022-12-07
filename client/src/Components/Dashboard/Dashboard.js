@@ -18,10 +18,13 @@ const Dashboard = () => {
             <div className="Dashboard-welcome flex col">
                 <h1>Welcome to <span className="webTitle">XRecon</span></h1>
 
-                <div className="Dashboard-copyUid flex">
-                    <input type="text" value={user.uid} readOnly />
-                    <div className="Dashboard-copyBtn flex" onClick={CopyUserID}>
-                        <MdContentCopy size={25} color="var(--white)" title="Copy User ID" />
+                <div className="Dashboard-copyUid flex col">
+                    <h2>Copy and share your User Id :</h2>
+                    <div className="flex">
+                        <input type="text" value={user.uid} readOnly />
+                        <div className="Dashboard-copyBtn flex" onClick={CopyUserID}>
+                            <MdContentCopy size={25} color="var(--white)" title="Copy User ID" />
+                        </div>
                     </div>
                 </div>
 
