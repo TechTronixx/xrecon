@@ -6,7 +6,7 @@ import { BsEye, BsEyeSlash } from "react-icons/bs"
 import { BiUser } from "react-icons/bi"
 import { FiUserPlus, FiLoader } from "react-icons/fi"
 import { GoSync } from "react-icons/go"
-// import { CircleBg } from "../../Assets/index.js"
+import { Xrecon } from "../../Assets/index.js"
 import { toast } from 'react-toastify'
 import multiavatar from '@multiavatar/multiavatar/esm'
 import axios from 'axios';
@@ -133,7 +133,10 @@ const Register = () => {
     return (
         <div className="Register-main flex col">
             <div className="Register-card">
-                <h1>Register to <span className="webTitle"> XRecon</span></h1>
+                <h1 className="flex">Register to
+                    <img src={Xrecon} className="Register-XImg" alt="Xrecon Logo" width={55} height={55} />
+                    <span className="webTitle">Recon</span>
+                </h1>
 
                 <div className="Register-avatar flex">
                     <div className="Register-setAvatar flex col">

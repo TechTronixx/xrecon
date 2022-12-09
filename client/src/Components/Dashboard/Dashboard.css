@@ -15,11 +15,20 @@
     font-size: 3em;
 }
 
+.Dashboard-XImg{
+    margin-top: -0.25em;
+    margin-right: -0.1em;
+}
+
 .Dashboard-welcome p{
     font-size: 0.8em;
 }
 
-.Dashboard-copyUid>h2{
+.Dashboard-copyUid{
+    gap: 0.2em;
+}
+
+.Dashboard-copyUid>span{
     font-size: 1em;
     letter-spacing: 1px;
 }

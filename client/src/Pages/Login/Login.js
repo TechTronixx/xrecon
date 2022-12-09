@@ -5,6 +5,7 @@ import { ChatSVG } from "../../Assets/index.js"
 import { MdAlternateEmail } from "react-icons/md"
 import { BsEye, BsEyeSlash } from "react-icons/bs"
 import { FiLogIn, FiLoader } from "react-icons/fi"
+import { Xrecon } from "../../Assets/index.js";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -54,12 +55,19 @@ const Login = () => {
     return (
         <div className="Login-main">
             <div className="Login-sideart flex col">
-                <h1 className="webTitle">XRecon</h1>
+                <div className="Login-Logo flex">
+                    <img src={Xrecon} alt="Xrecon Logo" width={70} height={70} />
+                    <h1 className="webTitle">Recon</h1>
+                </div>
+
                 <img src={ChatSVG} width={400} height={400} alt="Messaging" />
             </div>
             <div className="Login-form flex col">
                 <form onSubmit={HandleSubmit} className="flex col">
-                    <h2>Login to <span className="webTitle">XRecon</span></h2>
+                    <h2 className="flex">Login to
+                        <img src={Xrecon} className="Login-XImg" alt="Xrecon Logo" width={45} height={45} />
+                        <span className="webTitle">Recon</span>
+                    </h2>
 
                     <div className="Login-input flex">
                         <input type="email" placeholder="Email" ref={emailRef} required />

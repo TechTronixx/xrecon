@@ -4,6 +4,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { MdSearch } from "react-icons/md"
 import { FiFilter } from "react-icons/fi"
 import { RiChatNewLine } from "react-icons/ri"
+import { Xrecon } from "../../Assets";
 import ChatList from "../Chatlist/ChatList"
 import { useContextData } from "../../hooks/useContextData";
 
@@ -36,8 +37,9 @@ const Sidebar = () => {
     return (
         <div className='Sidebar-Main' ref={SidbarRef}>
             <div className="Sidebar-header flex">
-                <Link to="/">
-                    <h1 className="webTitle">XRecon</h1>
+                <Link to="/" className="flex">
+                    <img src={Xrecon} alt="Xrecon Logo" width={35} height={35} />
+                    <h1 className="webTitle">Recon</h1>
                 </Link>
 
                 <div className="flex gap-1">

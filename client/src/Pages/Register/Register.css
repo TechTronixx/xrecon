@@ -24,7 +24,7 @@
     column-gap: 3em;
 }
 
-.Register-main h1{
+.Register-card h1{
     color: var(--white);
     font-size: 3em;
     z-index: 1;
@@ -33,6 +33,11 @@
     padding: 0.3em;
     margin-bottom: 0.5em;
     height: fit-content;
+}
+
+.Register-XImg{
+    margin-top: -0.3em;
+    margin-right: -0.1em;
 }
 
 .Register-form{

@@ -12,11 +12,16 @@
     padding: 2em;
 }
 
-.Login-sideart h1{
+.Login-Logo h1{
     font-size: 4em;
     font-weight: 900;
     letter-spacing: 1px;
+    margin-top: 0.2em;
     /* color: var(--text); */
+}
+
+.Login-Logo img{
+    margin-right: -0.3em;
 }
 
 .Login-form{
@@ -37,6 +42,11 @@
     margin-bottom: 2em;
     font-size: 2.5em;
     color: var(--white);
+}
+
+.Login-XImg{
+    margin-top: -0.2em;
+    margin-right: -0.1em;
 }
 
 .Login-input{

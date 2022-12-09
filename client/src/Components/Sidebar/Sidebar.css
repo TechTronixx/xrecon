@@ -20,6 +20,11 @@
     text-decoration: none;
 }
 
+.Sidebar-header>a img{
+    margin-top: -0.4em;
+    margin-right: -0.1em;
+}
+
 .Sidebar-newChat{
     cursor: pointer;
 }
