@@ -52,7 +52,7 @@ body{
 }
 
 .webTitle{
-  background: linear-gradient(-50deg, 
+  background: linear-gradient(50deg, 
   var(--primary) 0%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -96,4 +96,22 @@ body{
 /* Disable blue button click highlight */
 input, button, a, div {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* PWA Install Btn */
+.PWAContainer{
+  justify-content: space-evenly;
+  gap: 2em;
+  color: var(--white);
+}
+
+.PWAContainer .PWABtn{
+  border: none;
+  background-color: var(--primary);
+  color: var(--white);
+  font-size: 1em;
+  padding: 0.2em 0.6em;
+  gap: 0.5em;
+  border-radius: 0.4em;
+  cursor: pointer;
 }
