@@ -27,7 +27,7 @@ const Register = () => {
     const avatarInputRef = useRef();
     const RandomBtnRef = useRef();
     const FormRef = useRef();
-    const SubmitRef = useRef();
+    // const SubmitRef = useRef();
 
     const navigate = useNavigate();
 
@@ -47,13 +47,11 @@ const Register = () => {
             if (result.data.status) {
                 toast.success("User registered successfully");
                 navigate('/login');
-            } else {
-                toast.error(result.data.error || "Something went wrong");
             }
             setLoading(false);
         } catch (err) {
             setLoading(false);
-            toast.error(err.response.data.error);
+            toast.error(err.response.data.error || "Something went wrong");
         }
     }
 
@@ -195,11 +193,11 @@ const Register = () => {
                     </div>
                     <p className="Register-errorMsg" style={error === "" ? { display: "none" } : { display: "flex" }}>{error}</p>
 
-                    <div className="Register-submit flex" onClick={() => SubmitRef.current.click()}>
+                    <button type="submit" className="Register-submit flex">
                         {!loading ? <FiUserPlus size={25} color="var(--white)" />
                             : <FiLoader className="Register-loaderSvg" size={25} color="var(--white)" />}
-                        <input type="submit" ref={SubmitRef} value="Create New Account" />
-                    </div>
+                        <span>Create New Account</span>
+                    </button>
                 </form>
                 <div className="Register-login flex gap-1">
                     <p>Already have an account?</p>

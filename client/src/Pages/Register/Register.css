@@ -89,22 +89,20 @@
 }
 
 .Register-submit{
-    min-width: 20em;
+    min-width: 24em;
     padding: 0.5em;
     border-radius: 0.4em;
+    border: none;
+    outline: none;
     background-color: var(--primary);
     gap: 1em;
     margin-top: 0.5em;
     cursor: pointer;
 }
 
-.Register-submit input{
-    border: none;
-    outline: none;
-    background-color: transparent;
+.Register-submit span{
     color: var(--text);
-    font-size: 1em;
-    cursor: pointer;
+    font-size: 1.1em;
 }
 
 .Register-loaderSvg{

@@ -56,3 +56,52 @@ exports.loginUser = async (req, res) => {
         res.send({ status: false, err });
     }
 }
+
+exports.findUser = async (req, res) => {
+    try {
+        const { userID } = req.body;
+        const user = await User.findById(userID).select("-password");
+        res.send({ status: true, user });
+    }
+    catch (err) {
+        console.log(err);
+        res.send({ status: false, err });
+    }
+}
+
+exports.addUserContacts = async (req, res) => {
+    const { userID, contactID } = req.body;
+
+    try {
+        const user = await User.findById(userID);
+        user.contacts.push(contactID);
+        await user.save();
+        res.send({ status: true });
+    } catch (err) {
+        console.log(err);
+        res.send({ status: false, err });
+    }
+}
+
+exports.getUserContacts = async (req, res) => {
+    const { userID } = req.body;
+    let ContactData = [];
+
+    try {
+        const user = await User.findById(userID);
+        const contacts = user.contacts;
+        for (let i = 0; i < contacts.length; i++) {
+            const contact = await User.findById(contacts[i]);
+            ContactData.push({
+                id: contact._id,
+                username: contact.username,
+                avatarImg: contact.avatarImg,
+            });
+        }
+
+        res.send({ status: true, ContactData });
+    } catch (err) {
+        console.log(err);
+        res.send({ status: false, err });
+    }
+}

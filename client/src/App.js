@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Browser, Routes, Route, Navigate } from 'react-router-dom';
 import { useContextData } from './hooks/useContextData';
 import { ToastContainer } from 'react-toastify';
@@ -12,9 +12,9 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 import ChatBox from './Components/ChatBox/ChatBox';
+import AddContact from './Components/AddContact/AddContact';
 
 function App() {
-  const [isUser, setIsUser] = useState(false);
   const { token, setToken, setUser } = useContextData();
 
   axios.defaults.headers.common['Authorization'] = token;
@@ -27,10 +27,6 @@ function App() {
     if (getUser) {
       setUser(getUser.user);
       setToken(getUser.token);
-
-      setIsUser(true);
-    } else {
-      setIsUser(false);
     }
 
     PWA();
@@ -42,8 +38,10 @@ function App() {
         <Routes>
           <Route element={token ? <Content /> : <Navigate to={"/login"} />}>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/chat/:uid" element={<ChatBox />} />
+            <Route path="/chat/:username" element={<ChatBox />} />
+            <Route path="/addContact" element={<AddContact />} />
           </Route>
+
           <Route path="/login" element={!token ? <Login /> : <Navigate to={"/"} />} />
           <Route path="/register" element={!token ? <Register /> : <Navigate to={"/"} />} />
         </Routes>

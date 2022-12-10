@@ -1,22 +1,36 @@
 import "./ChatBox.css";
-import { useState, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom"
+import { useState, useRef, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom"
+import { useContextData } from "../../hooks/useContextData";
+import axios from "axios"
+
 import { MdSearch, MdArrowBackIos } from "react-icons/md"
-import { BiSend } from "react-icons/bi"
+import { BiSend, BiUser } from "react-icons/bi"
 import { FaSmileWink } from "react-icons/fa"
 import { SlOptionsVertical } from "react-icons/sl"
-import EmojiPicker, { EmojiStyle, EmojiClickData } from 'emoji-picker-react';
+import EmojiPicker, { EmojiStyle } from 'emoji-picker-react';
 
 const ChatBox = () => {
     const [toggleEmoji, setToggleEmoji] = useState(false);
-    const { uid } = useParams();
+    const [contactInfo, setContactInfo] = useState({});
+    const { user } = useContextData();
+    const location = useLocation();
+
     const ChatbodyRef = useRef();
     const MsgInputRef = useRef();
+    const ContactAvatarRef = useRef();
     const navigate = useNavigate();
 
     let isMobile = window.innerWidth <= 750 ? true : false;
 
-    const HandleSendChat = (e) => {
+    useEffect(() => {
+        if (location.state) {
+            setContactInfo(location.state.data);
+            ContactAvatarRef.current.innerHTML = location.state.data.avatarImg;
+        }
+    }, [location])
+
+    const HandleSendChat = async (e) => {
         e.preventDefault();
         let msg = MsgInputRef.current.value;
         if (msg === "") return;
@@ -32,12 +46,19 @@ const ChatBox = () => {
         ChatbodyRef.current.innerHTML += `
             <div class="ChatBox-MsgBlob extMsg">
                 <div class="blob flex">
-                    <p>EXT: ${msg}</p>
+                    <p>${msg}</p>
                     <span>12:00</span>
                 </div>
             </div>`;
 
         MsgInputRef.current.value = "";
+
+        await axios.post("http://localhost:5000/api/chat/sendChat", {
+            msg,
+            from: user.uid,
+            to: contactInfo.id
+        });
+        // console.log(result);
     }
 
     const AddEmoji = (EmojiClickData) => {
@@ -52,11 +73,11 @@ const ChatBox = () => {
                 </div>
 
                 <div className="ChatBox-userInfo">
-                    <div className="ChatBox-avatar">
-                        <img src="https://api.multiavatar.com/luffy.png" alt="Avatar" width={50} height={50} />
+                    <div className="ChatBox-avatar flex" ref={ContactAvatarRef}>
+                        <BiUser size={35} color="var(--white)" />
                     </div>
                     <div className="ChatBox-info">
-                        <h2>Username: {uid}</h2>
+                        <h2>{contactInfo.username}</h2>
                         <p>online</p>
                     </div>
                 </div>

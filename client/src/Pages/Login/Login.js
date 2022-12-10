@@ -16,7 +16,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const emailRef = useRef();
     const passwordRef = useRef();
-    const SubmitRef = useRef();
+    // const SubmitRef = useRef();
 
     const { setUser, setToken } = useContextData();
     const navigate = useNavigate();
@@ -42,8 +42,6 @@ const Login = () => {
 
                 localStorage.setItem('xrecon-user-token', JSON.stringify({ user, token }));
                 navigate("/");
-            } else {
-                toast.error(result.data.error || "Something went wrong");
             }
             setLoading(false);
         } catch (err) {
@@ -81,11 +79,11 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <div className="Login-submit flex" onClick={() => SubmitRef.current.click()}>
+                    <button type="submit" className="Login-submit flex">
                         {!loading ? <FiLogIn size={25} color="var(--white)" />
                             : <FiLoader className="Login-loaderSvg" size={25} color="var(--white)" />}
-                        <input type="submit" ref={SubmitRef} value="Login" />
-                    </div>
+                        <span>Login</span>
+                    </button>
                 </form>
 
                 <div className="Login-register flex gap-1">

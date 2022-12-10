@@ -1,25 +1,26 @@
 import './Chatlist.css';
 import { useRef, useEffect } from 'react';
 import { MdKeyboardArrowDown } from "react-icons/md"
-import multiavatar from '@multiavatar/multiavatar/esm'
+import { BiUser } from "react-icons/bi"
 
-const ChatList = ({ uid }) => {
+
+const ChatList = ({ data }) => {
+    const { username, avatarImg } = data;
     const AvatarRef = useRef();
 
     useEffect(() => {
-        const AvatarSVG = multiavatar(Math.round(Math.random() * 10000));
-        AvatarRef.current.innerHTML = AvatarSVG;
-    }, [])
+        AvatarRef.current.innerHTML = avatarImg;
+    }, [avatarImg])
 
     return (
         <div className='Chatlist-Main'>
-            <div className="Chatlist-avatar" ref={AvatarRef}>
-                <img src="https://api.multiavatar.com/luffy.png" alt="Avatar" width={55} height={55} />
+            <div className="Chatlist-avatar flex" ref={AvatarRef}>
+                <BiUser size={30} color="var(--white)" />
             </div>
 
             <div className="Chatlist-info flex col">
                 <div className="Chatlist-userinfo">
-                    <span>Username: {uid}</span>
+                    <span>{username}</span>
                     <p>11/11/2022</p>
                 </div>
                 <div className="Chatlist-prevMsg">

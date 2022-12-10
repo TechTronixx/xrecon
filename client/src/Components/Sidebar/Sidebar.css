@@ -32,7 +32,9 @@
 .Sidebar-avatar{
     cursor: pointer;
     width: 40px;
-    height: 40px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    background-color: var(--grey);
 }
 
 /* .Sidebar-avatar svg{
@@ -73,6 +75,17 @@
 .Sidebar-chatList{
     overflow-y: auto;
     padding-bottom: 8em;
+}
+
+.Sidebar-chatList p{
+    width: 100%;
+    text-align: center;
+    color: var(--grey);
+    margin-top: 2em;
+}
+
+.Sidebar-chatItem{
+    text-decoration: none;
 }
 
 ::-webkit-scrollbar {

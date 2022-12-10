@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
+    contacts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Users",
+    }],
     createdAt: {
         type: Date,
         default: Date.now(),

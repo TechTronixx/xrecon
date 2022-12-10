@@ -16,7 +16,9 @@
 .Chatlist-avatar{
     margin-left: 0.5em;
     width: 55px;
-    height: 55px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    background-color: var(--grey);
 }
 
 /* .Chatlist-avatar img{
@@ -39,6 +41,7 @@
 }
 
 .Chatlist-userinfo span{
+    width: 100%;
     font-size: 1.1em;
     letter-spacing: 1px;
 }
@@ -46,6 +49,7 @@
 .Chatlist-userinfo p{
     color: var(--grey);
     font-size: 0.8em;
+    width: fit-content;
 }
 
 .Chatlist-prevMsg{
