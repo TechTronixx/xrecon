@@ -1,5 +1,4 @@
 import "./Dashboard.css"
-import Sidebar from "../Sidebar/Sidebar"
 import { useContextData } from "../../hooks/useContextData"
 import { ChatSVG, XreconText } from "../../Assets"
 import { MdContentCopy } from "react-icons/md"
