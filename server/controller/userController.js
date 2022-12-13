@@ -74,9 +74,16 @@ exports.addUserContacts = async (req, res) => {
 
     try {
         const user = await User.findById(userID);
-        user.contacts.push(contactID);
-        await user.save();
-        res.send({ status: true });
+        const contactList = user.contacts;
+        contactList.map(contact => {
+            if (contact == contactID) {
+                return res.send({ status: false, err: 'Contact already exists!' });
+            } else {
+                user.contacts.push(contactID);
+                await user.save();
+                return res.send({ status: true });
+            }
+        });
     } catch (err) {
         console.log(err);
         res.send({ status: false, err });
