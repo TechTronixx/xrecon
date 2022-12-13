@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import PWA from './Utils/PWA';
+// import FetchContacts from "./Components/FetchContacts";
 
 import Content from './Components/Content';
 import Dashboard from './Components/Dashboard/Dashboard';
@@ -15,9 +16,24 @@ import ChatBox from './Components/ChatBox/ChatBox';
 import AddContact from './Components/AddContact/AddContact';
 
 function App() {
-  const { token, setToken, setUser } = useContextData();
-
+  const { user, token, contactData, setToken, setUser, setContactData } = useContextData();
   axios.defaults.headers.common['Authorization'] = token;
+
+  // const FetchContacts = async (uid) => {
+  //   try {
+  //     const result = await axios.post("/getContacts", { userID: uid })
+  //     console.log(result.data);
+  //     if (result.data.status) {
+  //       setContactData(result.data.ContactData);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  // if (user?.uid && contactData.length === 0) {
+  //   FetchContacts(user.uid);
+  // }
 
   useEffect(() => {
     //Redirect if userToken exists
@@ -31,6 +47,7 @@ function App() {
 
     PWA();
   }, [setToken, setUser]);
+
 
   return (
     <div className="App">

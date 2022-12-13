@@ -11,9 +11,10 @@
   --grey-alt: rgba(204, 204, 204, 0.1);
   --white: #FFFFFF;
   --black: #000000;
+  --logosize: 2.1875em
 }
 
-body[data-theme="light"]{
+/* body[data-theme="light"]{
   --primary: #00A7E1;
   --accent: #5c34ce;
   --secondary: #F1F2F3;
@@ -23,14 +24,23 @@ body[data-theme="light"]{
   --grey: #6a6a6a;
   --white: #FFFFFF;
   --black: #000000;
-}
+} */
 
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+  /* font-size: 1rem; */
 }
+
+/* CSS Debuger */
+/* * {
+  background: #000 !important;
+  color: #0f0 !important;
+  outline: solid #f00 1px !important;
+} */
+/* CSS Debuger */
 
 body{
   background-color: var(--bg);
@@ -58,6 +68,7 @@ body{
   -webkit-text-fill-color: transparent;
   background-clip: text;
   /* font-size: inherit; */
+  margin-top: 0.1em;
   /* color: var(--secondary); */
 }
 
@@ -76,6 +87,30 @@ body{
     width: 100% !important;
   }
 }
+
+/* Smaller Devices below 360px */
+@media (max-width: 500px){
+  *{
+    font-size: 0.9rem;
+  }
+
+  .webTitle{
+    /* font-size: 1.25em; */
+    margin-top: 0.1em;
+  }
+}
+
+/* Devices below 400px */
+/* @media (max-width: 400px){
+  *{
+    font-size: 0.9rem;
+  }
+
+  .webTitle{
+    font-size: 1.25em;
+    margin-top: 0.2em;
+  }
+} */
 
 /* Custom ScrollBar */
 ::-webkit-scrollbar {

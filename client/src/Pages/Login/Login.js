@@ -5,7 +5,7 @@ import { ChatSVG } from "../../Assets/index.js"
 import { MdAlternateEmail } from "react-icons/md"
 import { BsEye, BsEyeSlash } from "react-icons/bs"
 import { FiLogIn, FiLoader } from "react-icons/fi"
-import { Xrecon } from "../../Assets/index.js";
+import { XreconText } from "../../Assets/index.js";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -54,8 +54,8 @@ const Login = () => {
         <div className="Login-main">
             <div className="Login-sideart flex col">
                 <div className="Login-Logo flex">
-                    <img src={Xrecon} alt="Xrecon Logo" width={70} height={70} />
-                    <h1 className="webTitle">Recon</h1>
+                    <img src={XreconText} alt="Xrecon Logo" width="auto" height={100} />
+                    {/* <h1 className="webTitle">Recon</h1> */}
                 </div>
 
                 <img src={ChatSVG} width={400} height={400} alt="Messaging" />
@@ -63,8 +63,8 @@ const Login = () => {
             <div className="Login-form flex col">
                 <form onSubmit={HandleSubmit} className="flex col">
                     <h2 className="flex">Login to
-                        <img src={Xrecon} className="Login-XImg" alt="Xrecon Logo" width={45} height={45} />
-                        <span className="webTitle">Recon</span>
+                        <img src={XreconText} className="Login-XImg" alt="Xrecon Logo" width="auto" height={50} />
+                        {/* <span className="webTitle" style={{ fontSize: "40px" }}>Recon</span> */}
                     </h2>
 
                     <div className="Login-input flex">

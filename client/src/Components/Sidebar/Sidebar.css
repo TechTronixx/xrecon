@@ -77,7 +77,7 @@
     padding-bottom: 8em;
 }
 
-.Sidebar-chatList p{
+.Sidebar-chatList>p{
     width: 100%;
     text-align: center;
     color: var(--grey);

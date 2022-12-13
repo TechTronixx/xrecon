@@ -20,22 +20,20 @@
     /* color: var(--text); */
 }
 
-.Login-Logo img{
-    margin-right: -0.3em;
-}
-
 .Login-form{
     width: 50%;
     background-color: var(--secondary-alt);
-    justify-content: space-between;
+    justify-content: space-evenly;
     text-align: center;
     padding: 2em;
 }
 
 .Login-form form{
+    min-width: 25em;
     height: 100%;
-    margin-bottom: 4em;
+    /* margin-bottom: 4em; */
     gap: 1.5em;
+    padding: 0 2.5em;
 }
 
 .Login-form form h2{
@@ -44,14 +42,10 @@
     color: var(--white);
 }
 
-.Login-XImg{
-    margin-top: -0.2em;
-    margin-right: -0.1em;
-}
-
 .Login-input{
     background-color: var(--white);
-    min-width: 20em;
+    width:100%;
+    /* min-width: 20em; */
     padding-right: 1em;
     border-radius: 0.4em;
     transition: 0.2s ease-in-out;
@@ -77,7 +71,8 @@
 .Login-submit{
     border: none;
     outline: none;
-    min-width: 24em;
+    width:100%;
+    /* min-width: 24em; */
     padding: 0.5em;
     border-radius: 0.4em;
     background-color: var(--primary);
@@ -128,13 +123,21 @@
     .Login-form{
         width: 100%;
         height: 100vh;
-        justify-content: center !important;
+        /* justify-content: center !important; */
         background: none;
     }
 
-    .Login-form form h2{
+    .Login-form form{
+        padding: 0;
+    }
+
+    /* .Login-form form h2{
         margin-bottom: 3em;
         margin-top: 3em;
+    } */
+
+    .Login-XImg{
+        margin-top: -0.4em;
     }
 
     .Login-input input{
@@ -142,6 +145,6 @@
     }
 
     .Login-register{
-        margin-bottom: 10em;
+        margin-bottom: 15em;
     }
 }

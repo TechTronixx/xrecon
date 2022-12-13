@@ -6,7 +6,7 @@ import { BsEye, BsEyeSlash } from "react-icons/bs"
 import { BiUser } from "react-icons/bi"
 import { FiUserPlus, FiLoader } from "react-icons/fi"
 import { GoSync } from "react-icons/go"
-import { Xrecon } from "../../Assets/index.js"
+import { XreconText } from "../../Assets/index.js"
 import { toast } from 'react-toastify'
 import multiavatar from '@multiavatar/multiavatar/esm'
 import axios from 'axios';
@@ -30,6 +30,7 @@ const Register = () => {
     // const SubmitRef = useRef();
 
     const navigate = useNavigate();
+    let mobiledevice = window.innerWidth <= 768 ? true : false;
 
     const HandleRegister = async (e) => {
         e.preventDefault();
@@ -131,10 +132,10 @@ const Register = () => {
     return (
         <div className="Register-main flex col">
             <div className="Register-card">
-                <h1 className="flex">Register to
-                    <img src={Xrecon} className="Register-XImg" alt="Xrecon Logo" width={55} height={55} />
-                    <span className="webTitle">Recon</span>
-                </h1>
+                <div className="Register-Logo flex">
+                    <h1>Register to</h1>
+                    <img src={XreconText} className="Register-XImg" alt="Xrecon Logo" width="auto" height={mobiledevice ? 35 : 70} />
+                </div>
 
                 <div className="Register-avatar flex">
                     <div className="Register-setAvatar flex col">

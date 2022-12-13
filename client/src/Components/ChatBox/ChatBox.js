@@ -22,6 +22,7 @@ const ChatBox = () => {
     const navigate = useNavigate();
 
     let isMobile = window.innerWidth <= 750 ? true : false;
+    let devHeight = window.innerHeight;
 
     useEffect(() => {
         if (location.state) {
@@ -66,7 +67,8 @@ const ChatBox = () => {
     }
 
     return (
-        <div className="ChatBox-main">
+        <div className="ChatBox-main" style={{ height: `${devHeight}px` }}>
+            {/* <div className="ChatBox-main"> */}
             <div className="ChatBox-header">
                 <div className="ChatBox-BackBtn flex" onClick={() => navigate("/")}>
                     <MdArrowBackIos size={isMobile ? 30 : 20} color="var(--grey)" />
@@ -77,7 +79,7 @@ const ChatBox = () => {
                         <BiUser size={35} color="var(--white)" />
                     </div>
                     <div className="ChatBox-info">
-                        <h2>{contactInfo.username}</h2>
+                        <span>{contactInfo.username}</span>
                         <p>online</p>
                     </div>
                 </div>
@@ -88,7 +90,7 @@ const ChatBox = () => {
                 </div>
             </div>
 
-            <div className="ChatBox-body" ref={ChatbodyRef}></div>
+            <div className="ChatBox-body" ref={ChatbodyRef} onClick={() => setToggleEmoji(false)}></div>
 
             <div className="ChatBox-footer">
                 {toggleEmoji &&
@@ -98,6 +100,8 @@ const ChatBox = () => {
                             height="350px"
                             emojiStyle={EmojiStyle.NATIVE}
                             previewConfig={{ showPreview: false }}
+                            autoFocusSearch={false}
+                            lazyLoadEmojis={true}
                             skinTonesDisabled
                             onEmojiClick={AddEmoji} />
                     </div>
@@ -107,12 +111,12 @@ const ChatBox = () => {
                     <div className="ChatBox-input flex">
                         <input type="text" placeholder="Type a message" ref={MsgInputRef} onFocus={() => setToggleEmoji(false)} />
                     </div>
-                    <button type="submit" className="flex">
+                    <button type="submit" className="flex" onFocus={() => setToggleEmoji(false)} >
                         <BiSend size={35} color="var(--primary)" />
                     </button>
                 </form>
             </div>
-        </div>
+        </div >
     )
 }
 

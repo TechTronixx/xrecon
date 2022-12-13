@@ -7,6 +7,7 @@
     background-color: var(--secondary);
     background-repeat: no-repeat;
     background-size: cover;
+    position: fixed;
     overflow: hidden;
 }
 
@@ -24,9 +25,9 @@
     column-gap: 3em;
 }
 
-.Register-card h1{
+.Register-Logo{
     color: var(--white);
-    font-size: 3em;
+    font-size: 1.6em;
     z-index: 1;
     grid-area: header;
     text-align: center;
@@ -36,8 +37,7 @@
 }
 
 .Register-XImg{
-    margin-top: -0.3em;
-    margin-right: -0.1em;
+    margin-top: -0.2em;
 }
 
 .Register-form{
@@ -184,13 +184,16 @@
 /* Mobile Responsive CSS  */
 @media (max-width:750px){
     .Register-main{
-        height: 100%;
+        margin-top: -3.5em;
     }
 
     .Register-main h1{
-        font-size: 2em;
-        position: relative;
-        padding-bottom: 0.5em;
+        font-size: 1.3em !important;
+        margin: 0;
+    }
+
+    .Register-XImg{
+        margin-top: -0.3em;
     }
 
     .Register-card{
@@ -198,6 +201,10 @@
         padding: 1em;
         display: grid;
         grid-template-areas: "header""avatar""form""login"!important;
+    }
+
+    .Register-avatar{
+        margin-top: 1em;
     }
 
     .Register-form{

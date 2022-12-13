@@ -40,13 +40,13 @@
     color: var(--text);
 }
 
-.Chatlist-userinfo span{
+.Chatlist-userinfo>span{
     width: 100%;
     font-size: 1.1em;
     letter-spacing: 1px;
 }
 
-.Chatlist-userinfo p{
+.Chatlist-userinfo>p{
     color: var(--grey);
     font-size: 0.8em;
     width: fit-content;

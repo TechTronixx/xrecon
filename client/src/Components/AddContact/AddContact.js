@@ -1,17 +1,19 @@
 import "./AddContact.css";
 import { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useContextData } from "../../hooks/useContextData";
 
-import { MdSearch } from "react-icons/md";
 import { BiUser, BiUserPlus } from "react-icons/bi";
+import { MdSearch, MdArrowBackIos } from "react-icons/md"
 
 const AddContact = () => {
     const [userResult, setUserResult] = useState(null);
     const SearchInputRef = useRef();
     const UserAvatarRef = useRef();
-    const { user } = useContextData();
+    const { user, setForceUpdate } = useContextData();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (userResult) {
@@ -30,7 +32,7 @@ const AddContact = () => {
         try {
             const result = await axios.post("/findUser", { userID })
             setUserResult(result.data.user);
-            console.log(result)
+            // console.log(result)
         }
         catch (err) {
             console.log(err)
@@ -41,18 +43,27 @@ const AddContact = () => {
     const AddUser = async () => {
         try {
             const result = await axios.post("/addContact", { userID: user.uid, contactID: userResult._id })
-            console.log(result)
-            toast.success("User Added to Chat 👍");
+            if (result.data.status) {
+                // let data = FetchContacts(user.uid);
+                // setContactData(data);
+                toast.success("User Added to Chat 👍");
+            }
+
         }
         catch (err) {
             console.log(err)
             toast.error(err.response.data.message || "Something went wrong");
         }
+
+        setForceUpdate(prev => prev + 1);
     }
 
     return (
         <div className="AddContact-Main">
             <div className="AddContact-Header flex">
+                <div className="ChatBox-BackBtn flex" onClick={() => navigate("/")}>
+                    <MdArrowBackIos size={25} color="var(--grey)" />
+                </div>
                 <h2>Add a new Contact</h2>
             </div>
 

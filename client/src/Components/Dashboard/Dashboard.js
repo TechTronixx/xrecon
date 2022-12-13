@@ -1,7 +1,7 @@
 import "./Dashboard.css"
 import Sidebar from "../Sidebar/Sidebar"
 import { useContextData } from "../../hooks/useContextData"
-import { ChatSVG, Xrecon } from "../../Assets"
+import { ChatSVG, XreconText } from "../../Assets"
 import { MdContentCopy } from "react-icons/md"
 import { toast } from "react-toastify"
 
@@ -17,8 +17,7 @@ const Dashboard = () => {
         <div className='Dashboard-Main'>
             <div className="Dashboard-welcome flex col">
                 <h1 className="flex">Welcome to
-                    <img src={Xrecon} className="Dashboard-XImg" alt="Xrecon Logo" width={52} height={52} />
-                    <span className="webTitle">Recon</span>
+                    <img src={XreconText} className="Dashboard-XImg" alt="Xrecon Logo" width="auto" height={70} />
                 </h1>
 
                 <img src={ChatSVG} alt="Welcome SVG" width={350} height={350} />
