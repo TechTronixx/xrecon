@@ -75,7 +75,7 @@ exports.addUserContacts = async (req, res) => {
     try {
         const user = await User.findById(userID);
         const contactList = user.contacts;
-        contactList.map(contact => {
+        contactList.map(async (contact) => {
             if (contact == contactID) {
                 return res.send({ status: false, err: 'Contact already exists!' });
             } else {
