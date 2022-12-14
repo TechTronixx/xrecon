@@ -13,13 +13,11 @@ const chatRoutes = require('./routes/chatRoutes');
 
 require('dotenv').config();
 app.use(express.json());
-app.use(cors(
-    {
-        origin: 'https://xrecon.onrender.com',
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'X-Requested-With', 'Accept', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Headers', 'Access-Control-Allow-Methods'],
-    }
-));
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'X-Requested-With', 'Accept', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Headers', 'Access-Control-Allow-Methods'],
+}));
 
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', '*');
