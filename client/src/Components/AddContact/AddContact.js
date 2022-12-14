@@ -58,6 +58,11 @@ const AddContact = () => {
         setForceUpdate(prev => prev + 1);
     }
 
+    const CopyUserID = () => {
+        navigator.clipboard.writeText(user.uid);
+        toast.success("Copied to clipboard", { position: "top-right" });
+    }
+
     return (
         <div className="AddContact-Main">
             <div className="AddContact-Header flex">
@@ -95,6 +100,16 @@ const AddContact = () => {
                     <div className="AddContact-SearchResult flex">
                         Ask your friend to share their User ID with you.
                     </div>}
+            </div>
+
+            <div className="AddContact-copyUid flex col">
+                <span>Copy and share your User Id :</span>
+                <div className="flex">
+                    <input type="text" value={user.uid} readOnly />
+                    <div className="AddContact-copyBtn flex" onClick={CopyUserID}>
+                        <MdContentCopy size={25} color="var(--white)" title="Copy User ID" />
+                    </div>
+                </div>
             </div>
         </div>
     )

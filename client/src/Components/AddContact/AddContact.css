@@ -86,3 +86,32 @@
     gap: 0.5em;
     cursor: pointer;
 }
+
+.AddContact-copyUid{
+    gap: 0.2em;
+}
+
+.AddContact-copyUid>span{
+    font-size: 1em;
+    letter-spacing: 1px;
+}
+    
+.AddContact-copyUid input{
+    border: none;
+    outline: none;
+    background-color: var(--secondary);
+    color: var(--white);
+    padding: 0.5em;
+    font-size: 1.1em;
+    width: 16em; 
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+}
+
+.AddContact-copyBtn{
+    padding: 0.5em;
+    cursor: pointer;
+    background-color: var(--primary);
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}
