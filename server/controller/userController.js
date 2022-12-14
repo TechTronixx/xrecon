@@ -81,6 +81,7 @@ exports.addUserContacts = async (req, res) => {
             } else {
                 user.contacts.push(contactID);
                 await user.save();
+                console.log('Contact added!');
                 return res.send({ status: true });
             }
         });

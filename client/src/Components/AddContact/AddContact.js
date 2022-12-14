@@ -43,10 +43,12 @@ const AddContact = () => {
     const AddUser = async () => {
         try {
             const result = await axios.post("/addContact", { userID: user.uid, contactID: userResult._id })
+            console.log(result)
             if (result.data.status) {
                 // let data = FetchContacts(user.uid);
                 // setContactData(data);
                 toast.success("User Added to Chat 👍");
+                navigate("/");
             }
 
         }
