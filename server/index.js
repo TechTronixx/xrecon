@@ -1,13 +1,19 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const app = express();
 
 const routes = require('./routes/routes');
 const chatRoutes = require('./routes/chatRoutes');
 
-const app = express();
-require('dotenv').config();
+const http = require('http').createServer(app);
+const socketIO = require('socket.io')(http, {
+    cors: {
+        origin: '*',
+    }
+});
 
+require('dotenv').config();
 app.use(cors());
 app.use(express.json());
 
@@ -23,6 +29,28 @@ mongoose.connect(process.env.MONGO_URL, {
     .catch(err => console.log(err));
 
 const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
-    console.log(`Server is running on port: ${PORT}`);
+// const server = app.listen(PORT, () => {
+//     console.log(`Server is running on port: ${PORT}`);
+// });
+
+global.onlineUsers = new Map();
+
+http.listen(PORT, () => {
+    socketIO.on('connection', (socket) => {
+        console.log('New user connected');
+        global.chatSocket = socket;
+        socket.on("addUser", (userId) => {
+            global.onlineUsers.set(userId, socket.id);
+        });
+
+        socket.on("sendMessage", ({ from, to, text }) => {
+            const receiverSocketId = global.onlineUsers.get(to);
+            if (receiverSocketId) {
+                socketIO.to(receiverSocketId).emit("getMessage", {
+                    from,
+                    text,
+                });
+            }
+        });
+    });
 });

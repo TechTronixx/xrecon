@@ -3,7 +3,6 @@ import { useRef, useEffect } from 'react';
 import { MdKeyboardArrowDown } from "react-icons/md"
 import { BiUser } from "react-icons/bi"
 
-
 const ChatList = ({ data }) => {
     const { username, avatarImg } = data;
     const AvatarRef = useRef();

@@ -96,7 +96,9 @@ exports.getUserContacts = async (req, res) => {
 
     try {
         const user = await User.findById(userID);
-        const contacts = user.contacts;
+        const contacts = user?.contacts;
+        if (!contacts) return res.send({ status: false, err: 'No contacts found!' });
+
         for (let i = 0; i < contacts.length; i++) {
             const contact = await User.findById(contacts[i]);
             ContactData.push({

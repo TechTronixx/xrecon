@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 export const Context = React.createContext();
 
@@ -6,6 +6,7 @@ const ContextProvider = (props) => {
     const [user, setUser] = useState({});
     const [token, setToken] = useState('');
     const [forceUpdate, setForceUpdate] = useState(0);
+    const socket = useRef();
 
     return (
         <Context.Provider value={{
@@ -14,7 +15,8 @@ const ContextProvider = (props) => {
             token,
             setToken,
             forceUpdate,
-            setForceUpdate
+            setForceUpdate,
+            socket
         }}>
             {props.children}
         </Context.Provider>

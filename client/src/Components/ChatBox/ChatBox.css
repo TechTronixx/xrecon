@@ -64,6 +64,23 @@
     /* overflow-y: scroll !important; */
 }
 
+.ChatBox-Loader{
+    /* infinite fade animation */
+    animation: fade 1.5s infinite;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .ChatBox-footer{
     width: 100%;
     position: relative;

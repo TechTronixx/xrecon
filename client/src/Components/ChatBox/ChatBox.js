@@ -2,18 +2,21 @@ import "./ChatBox.css";
 import { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
 import { useContextData } from "../../hooks/useContextData";
-import axios from "axios"
+import axios from "axios";
+import moment from "moment";
 
 import { MdSearch, MdArrowBackIos } from "react-icons/md"
 import { BiSend, BiUser } from "react-icons/bi"
 import { FaSmileWink } from "react-icons/fa"
 import { SlOptionsVertical } from "react-icons/sl"
 import EmojiPicker, { EmojiStyle } from 'emoji-picker-react';
+import { Xrecon } from "../../Assets";
 
 const ChatBox = () => {
     const [toggleEmoji, setToggleEmoji] = useState(false);
     const [contactInfo, setContactInfo] = useState({});
-    const { user } = useContextData();
+    const [initialChat, setInitialChat] = useState(false);
+    const { user, socket } = useContextData();
     const location = useLocation();
 
     const ChatbodyRef = useRef();
@@ -29,37 +32,110 @@ const ChatBox = () => {
             setContactInfo(location.state.data);
             ContactAvatarRef.current.innerHTML = location.state.data.avatarImg;
         }
-    }, [location])
+
+        const GetChats = async () => {
+            const result = await axios.post("/chat/getChat", {
+                from: user.uid,
+                to: location.state.data.id
+            });
+            console.log(result);
+            result.data.status && setInitialChat(true);
+
+            if (result.data.GetChats) {
+                const messages = result.data?.GetChats?.messages;
+                messages && messages.forEach(msg => {
+                    const time = moment(msg.createdAt).format('LT');
+
+                    if (msg.sender === user.uid) {
+                        ChatbodyRef.current.innerHTML += `
+                            <div class="ChatBox-MsgBlob selfMsg">
+                                <div class="blob flex">
+                                    <p>${msg.text}</p>
+                                    <span>${time}</span>
+                                </div>
+                            </div>`;
+                    } else {
+                        ChatbodyRef.current.innerHTML += `
+                            <div class="ChatBox-MsgBlob extMsg">
+                                <div class="blob flex">
+                                    <p>${msg.text}</p>
+                                    <span>${time}</span>
+                                </div>
+                            </div>`;
+                    }
+                });
+            }
+
+        }
+
+        if (!initialChat) {
+            GetChats();
+        }
+    }, [location.state, user.uid, initialChat])
+
+    useEffect(() => {
+        socket.current.on("getMessage", (data) => {
+            const time = moment().format('LT');
+
+            ChatbodyRef.current.innerHTML += `
+                <div class="ChatBox-MsgBlob extMsg">
+                    <div class="blob flex">
+                        <p>${data.text}</p>
+                        <span>${time}</span>
+                    </div>
+                </div>`;
+        })
+    }, [socket])
+
+    useEffect(() => {
+        if (contactInfo.id !== location.state.data.id) {
+            setInitialChat(false);
+            ChatbodyRef.current.innerHTML = "";
+        }
+    }, [location.state.data.id, contactInfo.id]);
+
+
 
     const HandleSendChat = async (e) => {
         e.preventDefault();
         let msg = MsgInputRef.current.value;
         if (msg === "") return;
+        let time = moment().format('LT');
 
         ChatbodyRef.current.innerHTML += `
             <div class="ChatBox-MsgBlob selfMsg">
                 <div class="blob flex">
                     <p>${msg}</p>
-                    <span>12:00</span>
+                    <span>${time}</span>
                 </div>
             </div>`;
 
-        ChatbodyRef.current.innerHTML += `
-            <div class="ChatBox-MsgBlob extMsg">
-                <div class="blob flex">
-                    <p>${msg}</p>
-                    <span>12:00</span>
-                </div>
-            </div>`;
+        // ChatbodyRef.current.innerHTML += `
+        //     <div class="ChatBox-MsgBlob extMsg">
+        //         <div class="blob flex">
+        //             <p>${msg}</p>
+        //             <span>12:00</span>
+        //         </div>
+        //     </div>`;
 
         MsgInputRef.current.value = "";
 
-        await axios.post("http://localhost:5000/api/chat/sendChat", {
-            msg,
-            from: user.uid,
-            to: contactInfo.id
-        });
-        // console.log(result);
+        try {
+            const result = await axios.post("/chat/sendChat", {
+                msg,
+                from: user.uid,
+                to: contactInfo.id
+            });
+            console.log("Msg Sent: ", result);
+
+            socket.current.emit("sendMessage", {
+                to: contactInfo.id,
+                from: user.uid,
+                text: msg
+            });
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     const AddEmoji = (EmojiClickData) => {
@@ -69,6 +145,7 @@ const ChatBox = () => {
     return (
         <div className="ChatBox-main" style={{ height: `${devHeight}px` }}>
             {/* <div className="ChatBox-main"> */}
+
             <div className="ChatBox-header">
                 <div className="ChatBox-BackBtn flex" onClick={() => navigate("/")}>
                     <MdArrowBackIos size={isMobile ? 30 : 20} color="var(--grey)" />
@@ -90,7 +167,15 @@ const ChatBox = () => {
                 </div>
             </div>
 
-            <div className="ChatBox-body" ref={ChatbodyRef} onClick={() => setToggleEmoji(false)}></div>
+            <div className="ChatBox-Loader flex" style={!initialChat ? { display: "flex" } : { display: "none" }}>
+                <img src={Xrecon} alt="loader" width={50} height={50} />
+            </div>
+            <div
+                className="ChatBox-body"
+                style={initialChat ? { display: "flex" } : { display: "none" }}
+                ref={ChatbodyRef}
+                onClick={() => setToggleEmoji(false)}>
+            </div>
 
             <div className="ChatBox-footer">
                 {toggleEmoji &&

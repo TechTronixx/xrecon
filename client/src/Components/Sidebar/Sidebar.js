@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import ChatList from "../Chatlist/ChatList"
 import { useContextData } from "../../hooks/useContextData";
 import axios from "axios";
+import { io } from "socket.io-client";
 
 import { XreconText } from "../../Assets";
 import { MdSearch } from "react-icons/md"
@@ -12,15 +13,21 @@ import { RiChatNewLine } from "react-icons/ri"
 import { BiUser } from "react-icons/bi"
 
 export default function Sidebar() {
-    const { user, setUser, setToken } = useContextData();
+    const { user, setUser, setToken, socket } = useContextData();
     const AvatarRef = useRef();
     const SidbarRef = useRef();
     const navigate = useNavigate();
+
     useEffect(() => {
         if (user) {
+            // const HOST = "http://localhost:5000/";
+            const HOST = "https://xrecon.onrender.com/";
+            socket.current = io(HOST);
+            socket.current.emit("addUser", user.uid);
+
             AvatarRef.current.innerHTML = user.avatarImg;
         }
-    }, [user])
+    }, [user, socket])
 
     const Logout = () => {
         setUser({});
