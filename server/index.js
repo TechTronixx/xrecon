@@ -12,13 +12,13 @@ const routes = require('./routes/routes');
 const chatRoutes = require('./routes/chatRoutes');
 
 require('dotenv').config();
-app.use(cors(
-    {
-        origin: '*',
-        allowedHeaders: ['Content-Type', 'Authorization'],
-    }
-));
 app.use(express.json());
+app.use(cors());
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+});
 
 app.use('/api', routes);
 app.use('/api/chat', chatRoutes);
