@@ -1,17 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const { createServer } = require("http");
+const { Server } = require("socket.io");
+
 const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer, { cors: { origin: "*" } });
 
 const routes = require('./routes/routes');
 const chatRoutes = require('./routes/chatRoutes');
-
-const http = require('http').createServer(app);
-const socketIO = require('socket.io')(http, {
-    cors: {
-        origin: '*',
-    }
-});
 
 require('dotenv').config();
 app.use(cors());
@@ -28,29 +26,31 @@ mongoose.connect(process.env.MONGO_URL, {
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.log(err));
 
-const PORT = process.env.PORT || 5000;
 // const server = app.listen(PORT, () => {
 //     console.log(`Server is running on port: ${PORT}`);
 // });
 
 global.onlineUsers = new Map();
 
-http.listen(PORT, () => {
-    socketIO.on('connection', (socket) => {
-        console.log('New user connected');
-        global.chatSocket = socket;
-        socket.on("addUser", (userId) => {
-            global.onlineUsers.set(userId, socket.id);
-        });
-
-        socket.on("sendMessage", ({ from, to, text }) => {
-            const receiverSocketId = global.onlineUsers.get(to);
-            if (receiverSocketId) {
-                socketIO.to(receiverSocketId).emit("getMessage", {
-                    from,
-                    text,
-                });
-            }
-        });
+io.on('connection', (socket) => {
+    console.log('New user connected');
+    global.chatSocket = socket;
+    socket.on("addUser", (userId) => {
+        global.onlineUsers.set(userId, socket.id);
     });
+
+    socket.on("sendMessage", ({ from, to, text }) => {
+        const receiverSocketId = global.onlineUsers.get(to);
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit("getMessage", {
+                from,
+                text,
+            });
+        }
+    });
+});
+
+const PORT = process.env.PORT || 5000;
+httpServer.listen(PORT, () => {
+    console.log(`Server is running on port: ${PORT}`);
 });

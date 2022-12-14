@@ -16,24 +16,8 @@ import ChatBox from './Components/ChatBox/ChatBox';
 import AddContact from './Components/AddContact/AddContact';
 
 function App() {
-  const { user, token, contactData, setToken, setUser, setContactData } = useContextData();
+  const { token, setToken, setUser } = useContextData();
   axios.defaults.headers.common['Authorization'] = token;
-
-  // const FetchContacts = async (uid) => {
-  //   try {
-  //     const result = await axios.post("/getContacts", { userID: uid })
-  //     console.log(result.data);
-  //     if (result.data.status) {
-  //       setContactData(result.data.ContactData);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // if (user?.uid && contactData.length === 0) {
-  //   FetchContacts(user.uid);
-  // }
 
   useEffect(() => {
     //Redirect if userToken exists
