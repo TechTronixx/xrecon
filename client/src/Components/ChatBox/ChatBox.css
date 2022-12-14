@@ -61,7 +61,7 @@
     /* margin-bottom: 4.5em; */
     gap: 0.6em;
     padding: 1em;
-    /* overflow-y: scroll !important; */
+    overflow-y: scroll !important;
 }
 
 .ChatBox-Loader{
