@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useContextData } from "../../hooks/useContextData";
 
 import { BiUser, BiUserPlus } from "react-icons/bi";
-import { MdSearch, MdArrowBackIos } from "react-icons/md"
+import { MdSearch, MdArrowBackIos, MdContentCopy } from "react-icons/md"
 
 const AddContact = () => {
     const [userResult, setUserResult] = useState(null);
