@@ -73,12 +73,18 @@ body{
 }
 
 .Content-main{
+  display: flex;
   transition: 1s ease-in-out;
+}
+
+.Outlet{
+  overflow: hidden;
 }
 
 @media (min-width: 751px){
   .Outlet{
-    margin-left: 30%;
+    /* margin-left: 30%; */
+    width: 70%;
   }
 }
   

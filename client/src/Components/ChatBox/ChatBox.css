@@ -1,10 +1,11 @@
 .ChatBox-main{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     background-color: var(--secondary-alt);
+    position: relative;
     overflow: hidden !important;
 }
 
@@ -15,8 +16,9 @@
     padding: 0.6em 1em;
     background-color: var(--secondary);
     width: 100%;
-    position: relative;
-    top: 0;
+    /* position: static; */
+    /* top: 0; */
+    z-index: 1;
 }
 
 .ChatBox-avatar{
@@ -50,23 +52,28 @@
     margin: 0 1em 0 0.5em;
 }
 
+.ChatBox-bodyContainer{
+    display: flex;
+    justify-content: flex-end;
+}
 
 .ChatBox-body{
     background-color: var(--secondary-alt);
-    height: 100%;
+    height: 80%;
     width: 100%;
-    display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    /* margin-bottom: 4.5em; */
     gap: 0.6em;
     padding: 1em;
+    padding-right: 0;
+    position: absolute;
+    /* bottom: 0; */
     overflow-y: scroll !important;
 }
 
 .ChatBox-Loader{
     /* infinite fade animation */
     animation: fade 1.5s infinite;
+    height: 70%;
 }
 
 @keyframes fade {
@@ -83,8 +90,9 @@
 
 .ChatBox-footer{
     width: 100%;
-    position: relative;
+    position: absolute;
     bottom: 0;
+    z-index: 1;
 }
 
 .ChatBox-emojiPicker {
@@ -104,6 +112,7 @@
 
 .ChatBox-MsgBlob{
     width: 100%;
+    margin: 0.5em 0;
     /* background-color: #fff; */
 }
 
@@ -120,8 +129,8 @@
 .ChatBox-MsgBlob .blob{
     background-color: var(--primary);
     min-width: 5em;
-    padding: 0.3em 1em;
-    border-radius: 0.5em;
+    padding: 0.3em 0.6em;
+    border-radius: 0.4em;
     align-items: flex-end;
     gap: 0.5em;
 }
@@ -130,8 +139,16 @@
     background-color: var(--secondary-light);
 }
 
+.ChatBox-MsgBlob .blob p{
+    overflow: hidden;
+    word-wrap: break-word;
+    width: 100%;
+    max-width: 18em;
+}
+
 .ChatBox-MsgBlob .blob span{
-    font-size: 0.7em;
+    min-width: 5em;
+    font-size: 0.6em;
     justify-self: start;
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: -0.4em;

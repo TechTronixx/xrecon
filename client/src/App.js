@@ -6,7 +6,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import PWA from './Utils/PWA';
-// import FetchContacts from "./Components/FetchContacts";
 
 import Content from './Components/Content';
 import Dashboard from './Components/Dashboard/Dashboard';

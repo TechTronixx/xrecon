@@ -54,7 +54,7 @@ const AddContact = () => {
         }
         catch (err) {
             console.log(err)
-            toast.error(err.response.data.message || "Something went wrong");
+            toast.error(err.response?.data?.message || "Something went wrong");
         }
 
         setForceUpdate(prev => prev + 1);

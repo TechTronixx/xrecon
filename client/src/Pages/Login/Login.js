@@ -46,6 +46,7 @@ const Login = () => {
             setLoading(false);
         } catch (err) {
             setLoading(false);
+            console.log(err);
             toast.error(err.response?.data?.error || "Something went wrong");
         }
     }
