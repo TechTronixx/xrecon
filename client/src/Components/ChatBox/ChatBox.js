@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { useContextData } from "../../hooks/useContextData";
 import ChatBlob from "./ChatBlob";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 // import moment from "moment";
 
 import { MdSearch, MdArrowBackIos } from "react-icons/md"
@@ -130,7 +131,7 @@ const ChatBox = () => {
             <div className="ChatBox-bodyContainer" style={initialChat ? { display: "flex" } : { display: "none" }} onClick={() => setToggleEmoji(false)}>
                 <div className="ChatBox-body" ref={ChatBodyRef}>
                     {messages.map((msg) => {
-                        return <ChatBlob key={msg._id} msg={msg} />
+                        return <ChatBlob key={uuidv4()} msg={msg} />
                     })}
                 </div>
             </div>

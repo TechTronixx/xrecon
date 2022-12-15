@@ -19,7 +19,11 @@ const chatRoutes = require('./routes/chatRoutes');
 require('dotenv').config();
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use('/', routes);
 app.use('/chat', chatRoutes);

@@ -43,7 +43,7 @@ const AddContact = () => {
     const AddUser = async () => {
         try {
             const result = await axios.post("/addContact", { userID: user.uid, contactID: userResult._id })
-            console.log(result)
+            // console.log(result)
             if (result.data.status) {
                 // let data = FetchContacts(user.uid);
                 // setContactData(data);
@@ -74,7 +74,7 @@ const AddContact = () => {
                 <h2>Add a new Contact</h2>
             </div>
 
-            <div className="AddContact-Body">
+            <div className="AddContact-Body flex col">
                 <div className="AddContact-Input flex">
                     <input type="text" placeholder="Paste or Enter the User ID" ref={SearchInputRef} />
                     <div className="AddContact-SearchBtn flex" onClick={FindUser}>
@@ -102,17 +102,18 @@ const AddContact = () => {
                     <div className="AddContact-SearchResult flex">
                         Ask your friend to share their User ID with you.
                     </div>}
-            </div>
 
-            <div className="AddContact-copyUid flex col">
-                <span>Copy and share your User Id :</span>
-                <div className="flex">
-                    <input type="text" value={user.uid} readOnly />
-                    <div className="AddContact-copyBtn flex" onClick={CopyUserID}>
-                        <MdContentCopy size={25} color="var(--white)" title="Copy User ID" />
+                <div className="AddContact-copyUid flex col">
+                    <span>Copy and share your User Id :</span>
+                    <div className="flex">
+                        <input type="text" value={user.uid} readOnly />
+                        <div className="AddContact-copyBtn flex" onClick={CopyUserID}>
+                            <MdContentCopy size={25} color="var(--white)" title="Copy User ID" />
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }

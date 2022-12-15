@@ -14,14 +14,17 @@
 }
 
 .AddContact-Body{
+    height: 100%;
     background-color: var(--secondary-alt);
     padding: 2em;
+    margin-bottom: 4em;
+    justify-content: space-evenly;
 }
 
-.AddContact-Input{
+/* .AddContact-Input{
     margin-top: 4em;
     margin-bottom: 2em;
-}
+} */
 
 .AddContact-Input input{
     width: 20em;
@@ -46,7 +49,7 @@
 .AddContact-SearchResult{
     background-color: var(--secondary-light);
     margin: 0 1em;
-    margin-top: 4em;
+    /* margin-top: 4em; */
     padding: 1em;
     border-radius: 0.4em;
 }
@@ -89,7 +92,7 @@
 }
 
 .AddContact-copyUid{
-    gap: 0.2em;
+    gap: 0.5em;
 }
 
 .AddContact-copyUid>span{

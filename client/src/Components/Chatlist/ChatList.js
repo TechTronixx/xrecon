@@ -12,40 +12,22 @@ const ChatList = ({ data }) => {
     }, [avatarImg])
 
     return (
-        <>
-            <div className='Chatlist-Main'>
-                <div className="Chatlist-avatar flex" ref={AvatarRef}>
-                    <BiUser size={30} color="var(--white)" />
-                </div>
+        <div className='Chatlist-Main'>
+            <div className="Chatlist-avatar flex" ref={AvatarRef}>
+                <BiUser size={30} color="var(--white)" />
+            </div>
 
-                <div className="Chatlist-info flex col">
-                    <div className="Chatlist-userinfo">
-                        <span>{username}</span>
-                        <p>11/11/2022</p>
-                    </div>
-                    <div className="Chatlist-prevMsg">
-                        <span>He Said Yo bro!</span>
-                        <MdKeyboardArrowDown size={30} color="var(--grey)" />
-                    </div>
+            <div className="Chatlist-info flex col">
+                <div className="Chatlist-userinfo">
+                    <span>{username}</span>
+                    <p>11/11/2022</p>
+                </div>
+                <div className="Chatlist-prevMsg">
+                    <span>He Said Yo bro!</span>
+                    <MdKeyboardArrowDown size={30} color="var(--grey)" />
                 </div>
             </div>
-            <div className='Chatlist-Main'>
-                <div className="Chatlist-avatar flex" ref={AvatarRef}>
-                    <BiUser size={30} color="var(--white)" />
-                </div>
-
-                <div className="Chatlist-info flex col">
-                    <div className="Chatlist-userinfo">
-                        <span>{username}</span>
-                        <p>11/11/2022</p>
-                    </div>
-                    <div className="Chatlist-prevMsg">
-                        <span>He Said Yo bro!</span>
-                        <MdKeyboardArrowDown size={30} color="var(--grey)" />
-                    </div>
-                </div>
-            </div>
-        </>
+        </div>
     )
 }
 

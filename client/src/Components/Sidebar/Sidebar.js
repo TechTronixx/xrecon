@@ -98,7 +98,6 @@ export default function Sidebar() {
                     {contacts?.length !== 0 ? contacts?.map((obj) => {
                         return <div className="Sidebar-ChatItem" key={obj.id} onClick={() => { openChat(obj) }}>
                             <ChatList data={obj} />
-                            {/* <ChatList data={obj} /> */}
                         </div>
                     })
                         : <p>No Contacts found.</p>}

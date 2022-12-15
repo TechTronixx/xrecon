@@ -89,8 +89,16 @@ body{
 }
   
 @media (max-width: 750px){
+  .Outlet{
+    width: 100%;
+  }
+
   .Content-main.Sidebar-Active .Sidebar-Main{
     width: 100% !important;
+  }
+
+  .Outlet.Sidebar-Active{
+    width: 0% !important;
   }
 }
 
