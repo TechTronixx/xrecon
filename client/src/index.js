@@ -9,7 +9,7 @@ axios.defaults.baseURL = 'https://xrecon.onrender.com/';
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.defaults.headers.common['Cache-Control'] = 'max-age=31536000';
 // axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
-axios.defaults.headers.common['Content-Type'] = 'text/plain';
+// axios.defaults.headers.common['Content-Type'] = 'text/plain';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<ContextProvider><App /></ContextProvider>
