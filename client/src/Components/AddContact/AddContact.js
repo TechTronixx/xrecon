@@ -30,7 +30,7 @@ const AddContact = () => {
         }
 
         try {
-            const result = await axios.post("/findUser", { userID })
+            const result = await axios.post("/api/findUser", { userID })
             setUserResult(result.data.user);
             // console.log(result)
         }
@@ -42,7 +42,7 @@ const AddContact = () => {
 
     const AddUser = async () => {
         try {
-            const result = await axios.post("/addContact", { userID: user.uid, contactID: userResult._id })
+            const result = await axios.post("/api/addContact", { userID: user.uid, contactID: userResult._id })
             // console.log(result)
             if (result.data.status) {
                 // let data = FetchContacts(user.uid);

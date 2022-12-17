@@ -29,6 +29,7 @@
 
 .Sidebar-Title{
     width: 100%;
+    padding: 0.5em 0;
     justify-content: space-between;
 }
 
@@ -109,11 +110,28 @@
     width: 100%;
     text-align: center;
     color: var(--grey);
-    margin-top: 2em;
+    margin-top: 3em;
 }
 
 .Sidebar-chatItem{
     text-decoration: none;
+}
+
+.Sidebar-Loader{
+    animation: fade 1.5s infinite;
+    height: 80%;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 .Sidebar-Nav{

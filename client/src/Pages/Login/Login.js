@@ -30,7 +30,7 @@ const Login = () => {
         // setUser({ email, password });
 
         try {
-            const result = await axios.post('/login', { email, password });
+            const result = await axios.post('/api/login', { email, password });
             // console.log(result);
 
             if (result.data.status) {

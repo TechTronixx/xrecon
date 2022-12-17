@@ -6,6 +6,7 @@ const ContextProvider = (props) => {
     const [user, setUser] = useState({});
     const [token, setToken] = useState('');
     const [forceUpdate, setForceUpdate] = useState(0);
+    const [onLogout, setOnLogout] = useState(false);
     const socket = useRef();
 
     return (
@@ -16,6 +17,8 @@ const ContextProvider = (props) => {
             setToken,
             forceUpdate,
             setForceUpdate,
+            onLogout,
+            setOnLogout,
             socket
         }}>
             {props.children}

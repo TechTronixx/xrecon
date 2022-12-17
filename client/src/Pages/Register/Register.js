@@ -38,12 +38,12 @@ const Register = () => {
         const defaultAvatar = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" color=#fff height="60" width="60" xmlns="http://www.w3.org/2000/svg" style="color: #fff;"><path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"></path></svg>';
 
         try {
-            const username = nameRef.current.value;
+            const username = nameRef.current.value.charAt(0).toUpperCase() + nameRef.current.value.slice(1);
             const email = emailRef.current.value.toLowerCase();
             const password = passwordRef.current.value;
             const avatar = AvatarRef?.current?.innerHTML || defaultAvatar;
 
-            const result = await axios.post('/register', { username, email, password, avatar });
+            const result = await axios.post('/api/register', { username, email, password, avatar });
 
             if (result.data.status) {
                 toast.success("User registered successfully");

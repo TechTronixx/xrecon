@@ -38,7 +38,7 @@ const ChatBox = () => {
 
         const GetChats = async () => {
             setMessages([]);
-            const result = await axios.post("/chat/getChat", {
+            const result = await axios.post("/api/chat/getChat", {
                 from: user.uid,
                 to: location.state.data.id
             });
@@ -81,7 +81,7 @@ const ChatBox = () => {
         MsgInputRef.current.value = "";
 
         try {
-            await axios.post("/chat/sendChat", {
+            await axios.post("/api/chat/sendChat", {
                 msg,
                 from: user.uid,
                 to: contactInfo.id
@@ -153,7 +153,12 @@ const ChatBox = () => {
                 <form onSubmit={HandleSendChat} className="ChatBox-typer flex">
                     <FaSmileWink size={isMobile ? 40 : 30} color="var(--grey)" onClick={() => setToggleEmoji(prev => !prev)} />
                     <div className="ChatBox-input flex">
-                        <input type="text" placeholder="Type a message" ref={MsgInputRef} onFocus={() => setToggleEmoji(false)} />
+                        <input
+                            type="text"
+                            autoComplete="off"
+                            placeholder="Type a message"
+                            ref={MsgInputRef}
+                            onFocus={() => setToggleEmoji(false)} />
                     </div>
                     <button type="submit" className="flex" onFocus={() => setToggleEmoji(false)} >
                         <BiSend size={35} color="var(--primary)" />

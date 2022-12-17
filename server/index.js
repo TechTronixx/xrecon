@@ -25,8 +25,8 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-app.use('/', routes);
-app.use('/chat', chatRoutes);
+app.use('/api/', routes);
+app.use('/api/chat', chatRoutes);
 
 // mongoose.connect(process.env.MONGO_LOCAL_URL, {
 mongoose.connect(process.env.MONGO_URL, {

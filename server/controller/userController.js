@@ -50,6 +50,7 @@ exports.loginUser = async (req, res) => {
             username: getUser.username,
             email: getUser.email,
             avatarImg: getUser.avatarImg,
+            contacts: getUser.contacts.length > 0 ? getUser.contacts : null,
         }
         res.send({ status: true, user, token });
     } catch (err) {

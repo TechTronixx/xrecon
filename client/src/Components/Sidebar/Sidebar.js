@@ -7,34 +7,36 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { toast } from "react-toastify";
 
-import { XreconText } from "../../Assets";
+import { XreconText, Xrecon } from "../../Assets";
 import { MdSearch } from "react-icons/md"
 import { FiUserPlus, FiLogOut } from "react-icons/fi"
 import { BiUser } from "react-icons/bi"
 
 export default function Sidebar() {
+    const [loading, setLoading] = useState(false);
     const [contacts, setContacts] = useState([]);
     const AvatarRef = useRef();
     const SidbarRef = useRef();
 
-    const { user, setUser, setToken, socket, forceUpdate } = useContextData();
+    const { user, setOnLogout, socket, forceUpdate } = useContextData();
     const navigate = useNavigate();
 
     const FetchContacts = async (uid) => {
+        setLoading(true);
         try {
-            const result = await axios.post("/getContacts", { userID: uid })
+            const result = await axios.post("/api/getContacts", { userID: uid })
             if (result.data.status) {
                 setContacts(result.data.ContactData);
             }
+            setLoading(false);
         } catch (error) {
+            setLoading(false);
             console.log(error);
         }
     }
 
     useEffect(() => {
-        if (user?.uid) {
-            FetchContacts(user.uid);
-        }
+        FetchContacts(user.uid);
     }, [user, forceUpdate])
 
     useEffect(() => {
@@ -55,13 +57,6 @@ export default function Sidebar() {
         searchValue.length !== 0 ? setContacts(prev => prev.filter((obj) => {
             return obj.username.toLowerCase().includes(searchValue);
         })) : FetchContacts(user.uid);
-    }
-
-    const Logout = () => {
-        setUser({});
-        setToken("");
-        localStorage.clear();
-        navigate("/login");
     }
 
     const CopyUserID = () => {
@@ -94,14 +89,20 @@ export default function Sidebar() {
             </div>
 
             <div className="Sidebar-ChatlistContainer">
-                <div className="Sidebar-chatList">
-                    {contacts?.length !== 0 ? contacts?.map((obj) => {
-                        return <div className="Sidebar-ChatItem" key={obj.id} onClick={() => { openChat(obj) }}>
-                            <ChatList data={obj} />
-                        </div>
-                    })
-                        : <p>No Contacts found.</p>}
-                </div>
+                {!loading ?
+                    <div className="Sidebar-chatList">
+                        {contacts?.length !== 0 ? contacts?.map((obj) => {
+                            return <div className="Sidebar-ChatItem" key={obj.id} onClick={() => { openChat(obj) }}>
+                                <ChatList data={obj} />
+                            </div>
+                        })
+                            : <p>No Contacts found.</p>}
+                    </div>
+                    :
+                    <div className="Sidebar-Loader flex">
+                        <img src={Xrecon} alt="loader" width={50} height={50} />
+                    </div>
+                }
             </div>
 
             <div className="Sidebar-Nav">
@@ -116,7 +117,7 @@ export default function Sidebar() {
                     </div>
                 </div>
 
-                <div className="Sidebar-Logout flex" onClick={Logout} title="Logout">
+                <div className="Sidebar-Logout flex" onClick={() => setOnLogout(true)} title="Logout">
                     <FiLogOut size={25} color="var(--white)" />
                 </div>
             </div>
