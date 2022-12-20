@@ -8,8 +8,9 @@ import { io } from "socket.io-client";
 import { toast } from "react-toastify";
 
 import { XreconText, Xrecon } from "../../Assets";
-import { MdSearch } from "react-icons/md"
-import { FiUserPlus, FiLogOut } from "react-icons/fi"
+import { MdSearch, MdOutlineSettings } from "react-icons/md"
+import { FiLogOut } from "react-icons/fi"
+import { TbUserPlus } from "react-icons/tb"
 import { BiUser } from "react-icons/bi"
 
 export default function Sidebar() {
@@ -26,8 +27,11 @@ export default function Sidebar() {
         try {
             const result = await axios.post("/api/getContacts", { userID: uid })
             if (result.data.status) {
+                console.log("Server Contacts");
                 setContacts(result.data.ContactData);
             }
+
+            localStorage.setItem('xrecon-user-contacts', JSON.stringify(result.data.ContactData));
             setLoading(false);
         } catch (error) {
             setLoading(false);
@@ -36,6 +40,12 @@ export default function Sidebar() {
     }
 
     useEffect(() => {
+        let localContacts = JSON.parse(localStorage.getItem('xrecon-user-contacts'));
+        if (localContacts) {
+            console.log("Local Contacts");
+            setContacts(localContacts);
+        }
+
         FetchContacts(user.uid);
     }, [user, forceUpdate])
 
@@ -73,8 +83,13 @@ export default function Sidebar() {
                         {/* <h1 className="webTitle" style={{ fontSize: "30px" }}>Recon</h1> */}
                     </Link>
 
-                    <div className="Sidebar-AddUser flex" onClick={() => { navigate("/addContact") }}>
-                        <FiUserPlus size={30} color="inherit" className="Sidebar-newChat" />
+                    <div className="flex gap-1">
+                        <div className="Sidebar-Options flex" onClick={() => { navigate("/addContact") }}>
+                            <TbUserPlus size={30} color="inherit" />
+                        </div>
+                        <div className="Sidebar-Options flex" onClick={() => { navigate("/settings") }}>
+                            <MdOutlineSettings size={30} color="inherit" />
+                        </div>
                     </div>
                 </div>
 

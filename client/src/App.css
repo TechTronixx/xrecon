@@ -11,6 +11,8 @@
   --grey-alt: rgba(204, 204, 204, 0.1);
   --white: #FFFFFF;
   --black: #000000;
+  --green: rgb(0, 207, 0);
+  --red: rgb(255, 0, 0);
   --logosize: 2.1875em
 }
 
@@ -99,6 +101,18 @@ body{
 
   .Outlet.Sidebar-Active{
     width: 0% !important;
+  }
+
+  .Toastify__toast-container{
+    width: 100% !important;
+    margin: 1em 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .Toastify__toast{
+    width: 90%;
   }
 }
 
@@ -197,7 +211,7 @@ input, button, a, div {
 
 /* PWA Install Btn */
 .PWAContainer{
-  justify-content: space-evenly;
+  justify-content: space-between;
   gap: 2em;
   color: var(--white);
 }

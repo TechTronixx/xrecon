@@ -13,6 +13,7 @@ import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 import ChatBox from './Components/ChatBox/ChatBox';
 import AddContact from './Components/AddContact/AddContact';
+import Settings from './Components/Settings/Settings';
 
 function App() {
   const { token, setToken, setUser } = useContextData();
@@ -40,6 +41,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/chat/:username" element={<ChatBox />} />
             <Route path="/addContact" element={<AddContact />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>
 
           <Route path="/login" element={!token ? <Login /> : <Navigate to={"/"} />} />
