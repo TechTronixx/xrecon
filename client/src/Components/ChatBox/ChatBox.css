@@ -28,6 +28,10 @@
     border-radius: 100%;
 }
 
+.ChatBox-avatar > svg{
+    width: 100%;
+}
+
 .ChatBox-info>span{
     font-size: 1em;
     letter-spacing: 1px;
@@ -143,7 +147,7 @@
     overflow: hidden;
     word-wrap: break-word;
     width: 100%;
-    max-width: 18em;
+    max-width: 20em;
 }
 
 .ChatBox-MsgBlob .blob span{
@@ -187,4 +191,10 @@
     outline: none;
     border: none;
     cursor: pointer;
+}
+
+@media (max-width: 750px){
+    .ChatBox-MsgBlob .blob p{
+        max-width: 14em;
+    }
 }

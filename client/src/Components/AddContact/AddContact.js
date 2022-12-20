@@ -100,7 +100,7 @@ const AddContact = () => {
                 </div>
                     :
                     <div className="AddContact-SearchResult flex">
-                        Ask your friend to share their User ID with you.
+                        Ask your friend to share their User ID.
                     </div>}
 
                 <div className="AddContact-copyUid flex col">

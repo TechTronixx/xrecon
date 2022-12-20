@@ -21,6 +21,10 @@
     background-color: var(--grey);
 }
 
+.Chatlist-avatar > svg{
+    width: 100%;
+}
+
 /* .Chatlist-avatar img{
     border-radius: 100%;
 } */
