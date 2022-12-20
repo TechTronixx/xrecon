@@ -1,17 +1,8 @@
 import "./Dashboard.css"
-import { useContextData } from "../../hooks/useContextData"
-import { ChatSVG, XreconText } from "../../Assets"
-import { MdContentCopy } from "react-icons/md"
-import { toast } from "react-toastify"
+import { ChatSVG, Devbase, XreconText } from "../../Assets"
+import { BsGithub } from "react-icons/bs"
 
 const Dashboard = () => {
-    const { user } = useContextData();
-
-    const CopyUserID = () => {
-        navigator.clipboard.writeText(user.uid);
-        toast.success("Copied to clipboard", { position: "top-right" });
-    }
-
     return (
         <div className='Dashboard-Main'>
             <div className="Dashboard-welcome flex col">
@@ -20,18 +11,21 @@ const Dashboard = () => {
                 </h1>
 
                 <img src={ChatSVG} alt="Welcome SVG" width={350} height={350} />
-
-                <div className="Dashboard-copyUid flex col">
-                    <span>Copy and share your User Id :</span>
-                    <div className="flex">
-                        <input type="text" value={user.uid} readOnly />
-                        <div className="Dashboard-copyBtn flex" onClick={CopyUserID}>
-                            <MdContentCopy size={25} color="var(--white)" title="Copy User ID" />
-                        </div>
-                    </div>
-                </div>
-
                 <p>XRecon is a realtime chat app, Users can text and interact with other users.</p>
+
+                <div className="Dashboard-Footer">
+                    <div className="Dashboard-Links flex">
+                        <a href="https://devbase.netlify.app/" target="_blank" rel="noreferrer" title="DevBase">
+                            <img src={Devbase} alt="DevBase" width={35} height={35} />
+                            <span>DevBase</span>
+                        </a>
+                        <a href="https://github.com/ChiragChrg" target="_blank" rel="noreferrer" title="GitHub">
+                            <BsGithub size={35} color="var(--white)" />
+                            <span>GitHub</span>
+                        </a>
+                    </div>
+                    <p>© Copyright 2022 ChiragChrg</p>
+                </div>
             </div>
         </div>
     )

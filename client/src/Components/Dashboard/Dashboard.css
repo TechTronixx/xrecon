@@ -8,7 +8,7 @@
 
 .Dashboard-welcome{
     width: 100%;
-    gap: 1.5em;
+    gap: 1em;
 }
 
 .Dashboard-welcome h1{
@@ -21,35 +21,42 @@
 
 .Dashboard-welcome p{
     font-size: 0.8em;
+    margin-top: 0.3em;
 }
 
-.Dashboard-copyUid{
-    gap: 0.2em;
+/* .Dashboard-Footer{
+    margin-top: 1em;
+} */
+
+.Dashboard-Links{
+    gap: 2em;
+    margin-bottom: 1em;
 }
 
-.Dashboard-copyUid>span{
-    font-size: 1em;
-    letter-spacing: 1px;
-}
-    
-.Dashboard-copyUid input{
-    border: none;
-    outline: none;
+.Dashboard-Links a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    border-radius: 0.4em;
+    transition: 0.2s ease-in-out;
     background-color: var(--secondary);
-    color: var(--white);
-    padding: 0.5em;
-    font-size: 1.1em;
-    width: 16em; 
-    border-top-left-radius: 0.5em;
-    border-bottom-left-radius: 0.5em;
 }
 
-.Dashboard-copyBtn{
-    padding: 0.5em;
-    cursor: pointer;
-    background-color: var(--primary);
-    border-top-right-radius: 0.5em;
-    border-bottom-right-radius: 0.5em;
+.Dashboard-Links a:hover{
+    background-color: var(--secondary-light);
+}
+
+.Dashboard-Links a span{
+    color: var(--white);
+    font-size: 1.1em;
+}
+
+.Dashboard-Footer p{
+    letter-spacing: 1px;
+    text-align: center;
 }
 
 /* Mobile Responsive CSS */
