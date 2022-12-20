@@ -1,25 +1,32 @@
 import "./AddContact.css";
 import { useRef, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useContextData } from "../../hooks/useContextData";
 
 import { BiUser, BiUserPlus } from "react-icons/bi";
-import { MdSearch, MdArrowBackIos, MdContentCopy } from "react-icons/md"
+import { MdSearch, MdArrowBackIos, MdContentCopy } from "react-icons/md";
+import { BsWhatsapp, BsFacebook, BsTwitter } from "react-icons/bs";
 
 const AddContact = () => {
     const [userResult, setUserResult] = useState(null);
-    const SearchInputRef = useRef();
-    const UserAvatarRef = useRef();
     const { user, setForceUpdate } = useContextData();
     const navigate = useNavigate();
+    const { connectID } = useParams();
+
+    const SearchInputRef = useRef();
+    const UserAvatarRef = useRef();
 
     useEffect(() => {
         if (userResult) {
             UserAvatarRef.current.innerHTML = userResult.avatarImg;
         }
-    }, [userResult])
+
+        if (connectID) {
+            SearchInputRef.current.value = connectID;
+        }
+    }, [userResult, connectID])
 
     const FindUser = async () => {
         const userID = SearchInputRef.current.value;
@@ -103,15 +110,30 @@ const AddContact = () => {
                         Ask your friend to share their User ID.
                     </div>}
 
-                <div className="AddContact-copyUid flex col">
-                    <span>Copy and share your User Id :</span>
-                    <div className="flex">
-                        <input type="text" value={user.uid} readOnly />
-                        <div className="AddContact-copyBtn flex" onClick={CopyUserID}>
-                            <MdContentCopy size={25} color="var(--white)" title="Copy User ID" />
+                <div className="AddContact-Share flex col gap-1">
+                    <div className="AddContact-copyUid flex col">
+                        <span>Share your User Id :</span>
+                        <div className="flex">
+                            <input type="text" value={user.uid} readOnly />
+                            <div className="AddContact-copyBtn flex" onClick={CopyUserID}>
+                                <MdContentCopy size={25} color="var(--white)" title="Copy User ID" />
+                            </div>
                         </div>
                     </div>
+
+                    <div className="AddContact-Social flex">
+                        <a href={`https://api.whatsapp.com/send?text=https://xrecon.netlify.app/connect/${user.uid}`} id="whatsapp">
+                            <BsWhatsapp size={25} color="var(--white)" />
+                        </a>
+                        <a href={`https://www.facebook.com/sharer/sharer.php?u=https://xrecon.netlify.app/connect/${user.uid}`} id="facebook">
+                            <BsFacebook size={25} color="var(--white)" />
+                        </a>
+                        <a href={`https://twitter.com/intent/tweet?text=https://xrecon.netlify.app/connect/${user.uid}`} id="twitter">
+                            <BsTwitter size={25} color="var(--white)" />
+                        </a>
+                    </div>
                 </div>
+
             </div>
 
         </div>

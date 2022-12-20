@@ -27,7 +27,7 @@ export default function Sidebar() {
         try {
             const result = await axios.post("/api/getContacts", { userID: uid })
             if (result.data.status) {
-                console.log("Server Contacts");
+                // console.log("Server Contacts");
                 setContacts(result.data.ContactData);
             }
 
@@ -42,7 +42,7 @@ export default function Sidebar() {
     useEffect(() => {
         let localContacts = JSON.parse(localStorage.getItem('xrecon-user-contacts'));
         if (localContacts) {
-            console.log("Local Contacts");
+            // console.log("Local Contacts");
             setContacts(localContacts);
         }
 
@@ -84,7 +84,7 @@ export default function Sidebar() {
                     </Link>
 
                     <div className="flex gap-1">
-                        <div className="Sidebar-Options flex" onClick={() => { navigate("/addContact") }}>
+                        <div className="Sidebar-Options flex" onClick={() => { navigate("/connect") }}>
                             <TbUserPlus size={30} color="inherit" />
                         </div>
                         <div className="Sidebar-Options flex" onClick={() => { navigate("/settings") }}>

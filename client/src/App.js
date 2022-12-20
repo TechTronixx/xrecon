@@ -1,6 +1,6 @@
 import './App.css';
 import { useEffect } from 'react';
-import { BrowserRouter as Browser, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Browser, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { useContextData } from './hooks/useContextData';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,6 +18,7 @@ import Settings from './Components/Settings/Settings';
 function App() {
   const { token, setToken, setUser } = useContextData();
   axios.defaults.headers.common['Authorization'] = token;
+  const { connectID } = useParams();
 
   useEffect(() => {
     //Redirect if userToken exists
@@ -29,23 +30,32 @@ function App() {
       setToken(getUser.token);
     }
 
+    if (connectID) {
+      console.log(connectID);
+    }
+
     PWA();
-  }, [setToken, setUser]);
+  }, [setToken, setUser, connectID]);
 
 
   return (
     <div className="App">
       <Browser>
         <Routes>
-          <Route element={token ? <Content /> : <Navigate to={"/login"} />}>
+          {token ? <Route element={<Content />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/chat/:username" element={<ChatBox />} />
-            <Route path="/addContact" element={<AddContact />} />
+            <Route path="/connect/" element={<AddContact />} />
+            <Route path="/connect/:connectID" element={<AddContact />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
+            :
+            <Route element={<Navigate to={"/login"} />} />}
+
 
           <Route path="/login" element={!token ? <Login /> : <Navigate to={"/"} />} />
           <Route path="/register" element={!token ? <Register /> : <Navigate to={"/"} />} />
+          <Route path="*" element={<div>Page Not Found</div>} />
         </Routes>
       </Browser>
 
