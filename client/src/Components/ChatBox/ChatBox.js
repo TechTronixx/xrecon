@@ -5,12 +5,13 @@ import { useContextData } from "../../hooks/useContextData";
 import ChatBlob from "./ChatBlob";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-// import moment from "moment";
+import { toast } from "react-toastify";
 
-import { MdSearch, MdArrowBackIos } from "react-icons/md"
+import { MdSearch, MdDelete, MdContentCopy } from "react-icons/md"
+import { HiOutlineChevronLeft } from "react-icons/hi"
 import { BiSend, BiUser } from "react-icons/bi"
 import { FaSmileWink } from "react-icons/fa"
-import { SlOptionsVertical } from "react-icons/sl"
+import { TbDotsVertical } from "react-icons/tb"
 import EmojiPicker, { EmojiStyle } from 'emoji-picker-react';
 import { Xrecon } from "../../Assets";
 
@@ -19,7 +20,9 @@ const ChatBox = () => {
     const [contactInfo, setContactInfo] = useState({});
     const [initialChat, setInitialChat] = useState(false);
     const [messages, setMessages] = useState([]);
-    const { user, socket } = useContextData();
+    const [deleteMenu, setDeleteMenu] = useState(false);
+
+    const { user, setUser, socket } = useContextData();
     const location = useLocation();
 
     const MsgInputRef = useRef();
@@ -54,6 +57,8 @@ const ChatBox = () => {
         if (!initialChat) {
             GetChats();
         }
+
+        setDeleteMenu(false);
     }, [location.state, user.uid, initialChat])
 
     useEffect(() => {
@@ -101,12 +106,55 @@ const ChatBox = () => {
         MsgInputRef.current.value += EmojiClickData.emoji;
     }
 
+    const HandleDeleteContact = async () => {
+        try {
+            console.log("B4", user.contacts)
+            const result = await axios.post("/api/deleteContact", { userID: user.uid, deleteUID: contactInfo.id });
+            if (result.data.status) {
+                let newContacts = user.contacts.filter(contact => contact.id !== contactInfo.id);
+                setUser({ ...user, contacts: newContacts });
+                console.log("A4", user.contacts)
+
+                let localContacts = JSON.parse(localStorage.getItem("xrecon-user-contacts"));
+                let newLocalContacts = localContacts.filter(contact => contact.id !== contactInfo.id);
+                localStorage.setItem("xrecon-user-contacts", JSON.stringify(newLocalContacts));
+
+                toast.success("Contact Deleted Successfully!");
+                navigate("/");
+            }
+        } catch (err) {
+            console.log(err);
+            toast.error("Something went wrong!");
+        }
+
+        setDeleteMenu(false);
+    }
+
+    const CopyUserID = () => {
+        navigator.clipboard.writeText(contactInfo.id);
+        setDeleteMenu(false);
+        toast.success("Copied to clipboard", { position: "top-right" });
+    }
+
     return (
         // <div className="ChatBox-main" style={{ height: `${devHeight}px` }}>
         <div className="ChatBox-main">
+            {deleteMenu && <div className="ChatBox-DeleteMenuHolder" onClick={() => setDeleteMenu(false)}>
+                <div className="ChatBox-DeleteMenu flex col">
+                    <div className="delete flex gap-05" onClick={HandleDeleteContact}>
+                        <MdDelete size={25} color="inherit" />
+                        <span>Delete Contact</span>
+                    </div>
+                    <div className="flex gap-05" onClick={CopyUserID}>
+                        <MdContentCopy size={20} color="var(--white)" />
+                        <span>Copy User ID</span>
+                    </div>
+                </div>
+            </div>}
+
             <div className="ChatBox-header">
                 <div className="ChatBox-BackBtn flex" onClick={() => navigate("/")}>
-                    <MdArrowBackIos size={isMobile ? 30 : 20} color="var(--grey)" />
+                    <HiOutlineChevronLeft size={25} color="var(--grey)" />
                 </div>
 
                 <div className="ChatBox-userInfo">
@@ -120,8 +168,13 @@ const ChatBox = () => {
                 </div>
 
                 <div className="ChatBox-options flex gap-1">
-                    <MdSearch size={isMobile ? 30 : 25} color="var(--grey)" />
-                    <SlOptionsVertical size={isMobile ? 30 : 20} color="var(--grey)" />
+                    <div className="btn flex">
+                        <MdSearch size={25} color="var(--grey)" />
+                    </div>
+
+                    <div className="btn flex" onClick={() => setDeleteMenu(prev => !prev)}>
+                        <TbDotsVertical size={25} color="var(--grey)" />
+                    </div>
                 </div>
             </div>
 
