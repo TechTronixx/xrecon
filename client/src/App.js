@@ -50,7 +50,7 @@ function App() {
             <Route path="/settings" element={<Settings />} />
           </Route>
             :
-            <Route element={<Navigate to={"/login"} />} />}
+            <Route path="/" element={<Navigate to={"/login"} />} />}
 
 
           <Route path="/login" element={!token ? <Login /> : <Navigate to={"/"} />} />
