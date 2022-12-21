@@ -109,14 +109,7 @@ exports.getUserContacts = async (req, res) => {
         const contacts = user?.contacts;
         if (!contacts) return res.send({ status: false, err: 'No contacts found!' });
 
-        for (let i = 0; i < contacts.length; i++) {
-            const contact = await User.findById(contacts[i]);
-            ContactData.push({
-                id: contact._id,
-                username: contact.username,
-                avatarImg: contact.avatarImg,
-            });
-        }
+        const ContactData = await User.find({ _id: { $in: contacts } }).select('_id username avatarImg');
 
         res.send({ status: true, ContactData });
     } catch (err) {

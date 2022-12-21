@@ -43,7 +43,6 @@ exports.GetChats = async (req, res) => {
     const { from, to } = req.body;
     try {
         const [GetChats] = await ChatModel.find({ users: { $all: [from, to] } });
-        console.log("Get Chat from DB")
         res.send({ status: true, GetChats });
     } catch (err) {
         console.log(err);
