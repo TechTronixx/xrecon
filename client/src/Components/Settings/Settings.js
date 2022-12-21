@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContextData } from "../../hooks/useContextData";
 import multiavatar from "@multiavatar/multiavatar/esm";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import { MdArrowBackIos } from "react-icons/md";
 import { BiUser, BiCheck, BiX } from "react-icons/bi";
@@ -11,9 +13,9 @@ import { GoSync } from "react-icons/go";
 const Settings = () => {
     const [isAvatarChanged, setIsAvatarChanged] = useState(false);
     const [isUnameChanged, setIsUnameChanged] = useState(false);
-    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState("");
 
-    const { user } = useContextData();
+    const { user, setUser } = useContextData();
     const navigate = useNavigate();
 
     const SyncRef = useRef();
@@ -37,9 +39,21 @@ const Settings = () => {
         }, 400);
     }
 
-    const HandleSaveAvatar = (isSave) => {
+    const HandleSaveAvatar = async (isSave) => {
         if (isSave) {
+            const AvatarImg = AvatarRef.current.innerHTML;
+            const result = await axios.post("/api/setAvatar", { userID: user.uid, AvatarImg });
 
+            if (!result.data.status) {
+                console.log(result.data.err);
+                toast.error(result?.data?.err);
+                return;
+            }
+
+            setUser({ ...user, avatarImg: AvatarImg });
+            let localUser = JSON.parse(localStorage.getItem("xrecon-user-token"));
+            localUser.user.avatarImg = AvatarImg;
+            localStorage.setItem("xrecon-user-token", JSON.stringify(localUser));
         } else {
             if (user.avatarImg) {
                 AvatarRef.current.innerHTML = user.avatarImg;
@@ -52,14 +66,27 @@ const Settings = () => {
         setIsAvatarChanged(false);
     }
 
-    const HandleSaveUname = (isSave) => {
+    const HandleSaveUname = async (isSave) => {
         if (isSave) {
+            const Username = UnameRef.current.value.charAt(0).toUpperCase() + UnameRef.current.value.slice(1);;
+            try {
+                await axios.post("/api/setUsername", { userID: user.uid, Username });
 
+                setUser({ ...user, username: Username });
+                let localUser = JSON.parse(localStorage.getItem("xrecon-user-token"));
+                localUser.user.username = Username;
+                localStorage.setItem("xrecon-user-token", JSON.stringify(localUser));
+                setError("");
+                setIsUnameChanged(false);
+            } catch (err) {
+                // console.log(err);
+                setError(err?.response?.data?.error);
+            }
         } else {
+            setError("");
+            setIsUnameChanged(false);
             UnameRef.current.value = user.username;
         }
-
-        setIsUnameChanged(false);
     }
 
     return (
@@ -99,7 +126,7 @@ const Settings = () => {
                     <div className="Settings-InputGroup">
                         <div className="Settings-Input Edit flex col">
                             <input type="text" placeholder="Username" defaultValue={user.username} ref={UnameRef} onChange={() => setIsUnameChanged(true)} />
-                            {isError && <p className="TxtHelper">Some error text</p>}
+                            {error !== "" && <p className="TxtHelper">{error}</p>}
                         </div>
 
                         {isUnameChanged && <div className="flex gap-1">

@@ -12,6 +12,9 @@ axios.defaults.baseURL = 'https://xrecon.onrender.com/';
 // axios.defaults.headers.common['Content-Type'] = 'text/plain';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<ContextProvider><App /></ContextProvider>
+root.render(
+    <ContextProvider>
+        <App />
+    </ContextProvider>
 );
 

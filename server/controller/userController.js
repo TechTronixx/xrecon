@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 exports.registerUser = async (req, res) => {
     const { username, email, password, avatar } = req.body;
-    console.log(req.body)
+
     try {
         const checkEmail = await User.findOne({ email });
         if (checkEmail) return res.status(400).json({ error: 'Email already exists!' });
@@ -31,7 +31,7 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
-    console.log(req.body)
+
     try {
         const getUser = await User.findOne({ email });
         if (!getUser) return res.status(400).json({ error: 'User does not exist!' });
@@ -120,6 +120,54 @@ exports.getUserContacts = async (req, res) => {
 
         res.send({ status: true, ContactData });
     } catch (err) {
+        console.log(err);
+        res.send({ status: false, err });
+    }
+}
+
+exports.deleteContact = async (req, res) => {
+    try {
+        const { userID, deleteUID } = req.body;
+        const user = await User.findById(userID);
+        user.contacts = user.contacts.filter(contact => contact != deleteUID);
+        await user.save();
+
+        console.log('Contact deleted!');
+        return res.send({ status: true });
+    }
+    catch (err) {
+        console.log(err);
+        res.send({ status: false, err });
+    }
+}
+
+exports.setUsername = async (req, res) => {
+    try {
+        const { userID, Username } = req.body;
+
+        const checkUsername = await User.findOne({ username: Username });
+        if (checkUsername) return res.status(400).json({ status: false, error: 'Username already exists!' });
+
+        const user = await User.findById(userID);
+        user.username = Username;
+        await user.save();
+        res.send({ status: true });
+    }
+    catch (err) {
+        console.log(err);
+        res.send({ status: false, err });
+    }
+}
+
+exports.setAvatar = async (req, res) => {
+    try {
+        const { userID, AvatarImg } = req.body;
+        const user = await User.findById(userID);
+        user.avatarImg = AvatarImg;
+        await user.save();
+        res.send({ status: true });
+    }
+    catch (err) {
         console.log(err);
         res.send({ status: false, err });
     }

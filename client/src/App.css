@@ -59,6 +59,10 @@ body{
   flex-direction: column;
 }
 
+.gap-05{
+  gap: 1em;
+}
+
 .gap-1{
   gap: 1em;
 }
