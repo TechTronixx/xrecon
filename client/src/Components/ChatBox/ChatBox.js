@@ -43,7 +43,7 @@ const ChatBox = () => {
             setMessages([]);
             const result = await axios.post("/api/chat/getChat", {
                 from: user.uid,
-                to: location.state.data.id
+                to: location.state.data._id
             });
             result.data.status && setInitialChat(true);
 
@@ -70,11 +70,11 @@ const ChatBox = () => {
     }, [socket, messages])
 
     useEffect(() => {
-        if (contactInfo.id !== location.state.data.id) {
+        if (contactInfo._id !== location.state.data._id) {
             setInitialChat(false);
             setMessages([]);
         }
-    }, [location.state.data.id, contactInfo.id]);
+    }, [location.state.data._id, contactInfo._id]);
 
     const HandleSendChat = async (e) => {
         e.preventDefault();
@@ -89,11 +89,11 @@ const ChatBox = () => {
             await axios.post("/api/chat/sendChat", {
                 msg,
                 from: user.uid,
-                to: contactInfo.id
+                to: contactInfo._id
             });
 
             socket.current.emit("sendMessage", {
-                to: contactInfo.id,
+                to: contactInfo._id,
                 from: user.uid,
                 text: msg
             });
@@ -108,15 +108,13 @@ const ChatBox = () => {
 
     const HandleDeleteContact = async () => {
         try {
-            console.log("B4", user.contacts)
-            const result = await axios.post("/api/deleteContact", { userID: user.uid, deleteUID: contactInfo.id });
+            const result = await axios.post("/api/deleteContact", { userID: user.uid, deleteUID: contactInfo._id });
             if (result.data.status) {
-                let newContacts = user.contacts.filter(contact => contact.id !== contactInfo.id);
+                let newContacts = user.contacts.filter(contact => contact !== contactInfo._id);
                 setUser({ ...user, contacts: newContacts });
-                console.log("A4", user.contacts)
 
                 let localContacts = JSON.parse(localStorage.getItem("xrecon-user-contacts"));
-                let newLocalContacts = localContacts.filter(contact => contact.id !== contactInfo.id);
+                let newLocalContacts = localContacts.filter(contact => contact.id !== contactInfo._id);
                 localStorage.setItem("xrecon-user-contacts", JSON.stringify(newLocalContacts));
 
                 toast.success("Contact Deleted Successfully!");
@@ -131,7 +129,7 @@ const ChatBox = () => {
     }
 
     const CopyUserID = () => {
-        navigator.clipboard.writeText(contactInfo.id);
+        navigator.clipboard.writeText(contactInfo._id);
         setDeleteMenu(false);
         toast.success("Copied to clipboard", { position: "top-right" });
     }
