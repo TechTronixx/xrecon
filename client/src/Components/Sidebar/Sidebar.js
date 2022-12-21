@@ -107,7 +107,7 @@ export default function Sidebar() {
                 {!loading ?
                     <div className="Sidebar-chatList">
                         {contacts?.length !== 0 ? contacts?.map((obj) => {
-                            return <div className="Sidebar-ChatItem" key={obj.id} onClick={() => { openChat(obj) }}>
+                            return <div className="Sidebar-ChatItem" key={obj._id} onClick={() => { openChat(obj) }}>
                                 <ChatList data={obj} />
                             </div>
                         })
@@ -128,7 +128,7 @@ export default function Sidebar() {
 
                     <div className="Sidebar-UserInfo">
                         <h3>{user?.username}</h3>
-                        <p onClick={CopyUserID}>{user?.uid}</p>
+                        <p onClick={CopyUserID}>Copy UserID</p>
                     </div>
                 </div>
 
