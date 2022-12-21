@@ -6,7 +6,7 @@ import multiavatar from "@multiavatar/multiavatar/esm";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-import { MdArrowBackIos } from "react-icons/md";
+import { HiOutlineChevronLeft } from "react-icons/hi";
 import { BiUser, BiCheck, BiX } from "react-icons/bi";
 import { GoSync } from "react-icons/go";
 
@@ -93,12 +93,12 @@ const Settings = () => {
         <div className="Settings-Main">
             <div className="Settings-header flex">
                 <div className="Settings-BackBtn flex" onClick={() => navigate("/")}>
-                    <MdArrowBackIos size={25} color="var(--grey)" />
+                    <HiOutlineChevronLeft size={25} color="var(--grey)" />
                 </div>
                 <h2>Settings</h2>
             </div>
 
-            <div className="Settings-body">
+            <div className="Settings-body flex col">
                 <div className="Settings-AvatarHolder flex col">
                     <div className="Settings-Avatar" ref={AvatarRef}>
                         <BiUser size={35} color="var(--white)" />
@@ -151,7 +151,11 @@ const Settings = () => {
                         </div>
                     </div>
                 </div>
+                <div className="Settings-Footer">
+                    <p>© Copyright 2022 ChiragChrg</p>
+                </div>
             </div>
+
         </div>
     )
 }

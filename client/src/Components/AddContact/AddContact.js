@@ -6,7 +6,8 @@ import { toast } from "react-toastify";
 import { useContextData } from "../../hooks/useContextData";
 
 import { BiUser, BiUserPlus } from "react-icons/bi";
-import { MdSearch, MdArrowBackIos, MdContentCopy } from "react-icons/md";
+import { HiOutlineChevronLeft } from "react-icons/hi";
+import { MdSearch, MdContentCopy } from "react-icons/md";
 import { BsWhatsapp, BsFacebook, BsTwitter } from "react-icons/bs";
 
 const AddContact = () => {
@@ -75,8 +76,8 @@ const AddContact = () => {
     return (
         <div className="AddContact-Main">
             <div className="AddContact-Header flex">
-                <div className="ChatBox-BackBtn flex" onClick={() => navigate("/")}>
-                    <MdArrowBackIos size={25} color="var(--grey)" />
+                <div className="AddContact-BackBtn flex" onClick={() => navigate("/")}>
+                    <HiOutlineChevronLeft size={25} color="var(--grey)" />
                 </div>
                 <h2>Add a new Contact</h2>
             </div>

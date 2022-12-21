@@ -12,9 +12,20 @@
     letter-spacing: 1px;
 }
 
-.Settings-BackBtn {
+.Settings-BackBtn{
     padding: 0.5em;
+    margin-right: 0.5em;
+    border-radius: 100%;
     cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.Settings-BackBtn:hover{
+    background-color: var(--secondary-alt);
+}
+
+.Settings-Body{
+    position: relative;
 }
 
 .Settings-AvatarHolder{
@@ -102,4 +113,15 @@
     width: 100%;
     padding: 0 0.8em;
     border-radius: 0.3em;
+}
+
+.Settings-Footer{
+    position: absolute;
+    bottom: 2em;
+    /* width: 100%; */
+}
+
+.Settings-Footer p{
+    letter-spacing: 1px;
+    text-align: center;
 }

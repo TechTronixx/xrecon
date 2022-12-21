@@ -13,6 +13,18 @@
     gap: 2em;
 }
 
+.AddContact-BackBtn{
+    padding: 0.5em;
+    margin-right: 0.5em;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.AddContact-BackBtn:hover{
+    background-color: var(--secondary-alt);
+}
+
 .AddContact-Body{
     height: 100%;
     background-color: var(--secondary-alt);
