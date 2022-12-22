@@ -1,10 +1,11 @@
+# XRecon
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4c50a682-456f-42ab-8c52-79f980ec39b4/deploy-status)](https://app.netlify.com/sites/xrecon/deploys)
 
-# XRecon
-##### Created : 01/12/2022
+A chatting app developed by ChiragChrg, similar to WhatsApp. Allows users to text and interact with each other.
 
-#### Languages
+## Tech stack used 
+
 <div align="center">
       <img
         alt="HTML5"
@@ -50,3 +51,23 @@
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" 
       />
 </div>
+
+## Demo
+
+Check out a live demo of XRecon at https://xrecon.netlify.app/.
+
+## Features
+
+Some features of XRecon include:
+
+- Text messaging with other users
+- User profiles with profile pictures
+- Intuitive interface
+
+## Usage
+
+To use XRecon, sign up for an account and start messaging and interacting with other users.
+
+## License
+
+XRecon is licensed under the MIT license. View the license file [here](LICENSE).
