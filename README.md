@@ -2,9 +2,9 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4c50a682-456f-42ab-8c52-79f980ec39b4/deploy-status)](https://app.netlify.com/sites/xrecon/deploys)
 
-A chatting app developed by ChiragChrg, similar to WhatsApp. Allows users to text and interact with each other.
+A simple chatting app developed by ChiragChrg, similar to WhatsApp. Allows users to text and interact with each other.
 
-## Tech stack used 
+## Tools and Techstacks used :
 
 <div align="center">
       <img
@@ -56,18 +56,35 @@ A chatting app developed by ChiragChrg, similar to WhatsApp. Allows users to tex
 
 Check out a live demo of XRecon at https://xrecon.netlify.app/.
 
-## Features
 
+## Features
 Some features of XRecon include:
 
-- Text messaging with other users
-- User profiles with profile pictures
-- Intuitive interface
+- **Text messaging:** Allows users to send and receive text messages with other users in real-time.
+- Customizable user profiles: Allows users to create and customize their own profiles, including the option to use a custom avatar generator to create a unique profile picture.
+- **Mobile-optimized UI:** Provides a user interface that is optimized for use on mobile devices, ensuring a smooth and seamless experience on smaller screens.
+- **PWA (Progressive Web App) support:** Enables the web app to be installed and used like a native app on mobile devices, providing offline functionality and a seamless user experience.
+- **JWT (JSON Web Token) authentication:** Ensures secure user authentication using tokens signed with a secret key, allowing users to access the app without needing to enter their credentials each time.
+- **Intuitive interface:** Provides an easy-to-use interface that is simple to navigate and understand, allowing users to quickly find and use the features they need.
+
+## Installation
+
+To run XRecon on your local machine, follow these steps:
+
+1.  Clone the XRecon repository to your local machine using `git clone https://github.com/ChiragChrg/XRecon.git`.
+2.  Navigate to the root directory of the project and install the dependencies by running `npm install`.
+3.  Start the server by running `npm run start`.
+4.  In a separate terminal, navigate to the client directory and install the dependencies by running `npm install`.
+5.  Start the client by running `npm run start`.
+6.  Open your web browser and go to `http://localhost:3000` to access the XRecon app.
+
+Note: Make sure you have Node.js and MongoDB installed on your machine.
 
 ## Usage
 
 To use XRecon, sign up for an account and start messaging and interacting with other users.
 
-## License
+<!-- ## License
 
-XRecon is licensed under the MIT license. View the license file [here](LICENSE).
+XRecon is licensed under the MIT license. View the license file [here](LICENSE). -->
+
